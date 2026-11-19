@@ -9,50 +9,118 @@ import { initScrollFadeIn } from "@/lib/scrollFadeIn";
 
 function adaptContent(source: string) {
   const replacements: [string, string][] = [
-    ["Althea", "Meter Surgicals"],
-    ["Journal", "Brochure"],
-    ["Services", "Products"],
-    ["./book-a-consultation", "/contact"],
-    ["/book-a-consultation", "/contact"],
-    ["Modern aesthetic and wellness care, with a gentle and personal approach.", "CE-certified surgical drapes, procedure packs, and non-woven disposables for healthcare providers."],
-    ["Our Services", "Our Products"],
-    ["Thoughtful care, chosen&nbsp;for&nbsp;you.", "Surgical drapes for every procedure."],
-    ["We offer a carefully selected range of aesthetic and wellness treatments focused on natural results and long-term skin health.", "Explore surgical drapes, procedure packs, sterilization wrapping sheets, and other medical disposables from our brochure."],
-    ["Skin Health", "General Surgery Drapes"],
-    ["Aesthetic Care", "Gynecology Surgery Drapes"],
-    ["Wellness &amp; Recovery", "Orthopedic Surgery Drapes"],
-    ["Personal Consultation", "Sterilization Wrapping Sheets"],
-    ["Long-Term Care Plans", "Other Surgery Drapes"],
-    ["Treatments designed to support balanced, healthy skin and maintain its natural strength over time.", "General, mini, universal, HB SAG, and HIV protection drape packs. Customer-specific packs can be requested."],
-    ["Subtle, non-invasive treatments designed to refresh your natural look without going to extremes.", "LSCS, delivery, DNC, Hystro Lap, perineal drape kits, and maternity mats. Customisation is available on request."],
-    ["Care that supports deep relaxation, gentle recovery, and overall well-being for body and mind.", "Ortho packs, knee and hip drapes, arthroscopy, TKR, THR, and shoulder arthroscopy packs."],
-    ["A calm, one-on-one conversation to understand your goals and create a plan that fits you.", "SMS sterilization wrapping sheets in 50, 60, 75, and 90 cm sizes; custom sizes and 43/50 GSM options."],
-    ["Thoughtful programs built around your skin and wellness needs, focused on lasting results.", "CABG, Angio, LAVH, renal transplant, cystoscopy, IVF, urology, neurology, laparoscopy, PCNL, and TURP drapes."],
-    ["Tap to learn more", "View product details"],
-    ["Click to learn more", "View product details"],
-    ["Book a consultation", "Contact Meter Surgicals"],
-    ["Trusted by 80+ clients", "CE-certified manufacturer · Incorporated 2010"],
-    ["Pricing", "Product Catalog"],
-    ["Aesthetic & Wellness", "Surgical Drapes & Disposables"],
-    ["Our Approach", "Our Company"],
-    ["Bringing the pieces together.", "Surgical products for procedure needs."],
-    ["Your Care Journey.", "Explore our product range."],
-    ["Ready to begin your care?", "Need product information?"],
-    ["Every step at Meter Surgicals starts with a conversation. Together, we create a plan that feels right for you — calm, considered, and focused on long-term well-being.", "Contact our team for product details, customer-specific drape packs, and brochure information."],
-    ["Send us an email or connect with us on social", "Call +91 89254 99953 or email metersurgicals@gmail.com"],
-    ["Listening first", "Quality and hygiene"],
-    ["Every journey starts with a real conversation. We take time to understand your goals, your concerns, and what truly matters to you.", "Meter Surgicals focuses on quality, hygiene, and infection control in surgical environments."],
-    ["Careful choices", "Drapes and kits"],
-    ["We recommend only what makes sense for you. No trends, no pressure — just thoughtful treatments chosen with care.", "The brochure includes general and specialty surgery drapes, procedure packs, and kits."],
-    ["Subtle results", "Wrapping sheets"],
-    ["Our focus is on natural-looking outcomes. The goal is to help you look refreshed and feel confident, never overdone.", "SMS wrapping sheets are available in standard and customized sizes."],
-    ["Long-term care", "Other disposables"],
-    ["We think beyond quick fixes. Our approach supports your skin health and well-being over time, not just today.", "The catalog also includes gowns, bed sheets, covers, aprons, and other non-woven disposables."],
-    ["Trusted by 80+ clients", "CE-certified manufacturer · incorporated in 2010"],
+    ["Althea", "Meter Surgicals"], ["Journal", "Brochure"], ["Services", "Products"],
+    ["Our Journal", "Product Brochure"],
+    ["href=\"./about\"", "href=\"/about\""], ["href=\"./services\"", "href=\"/products\""],
+    ["href=\"./journal\"", "href=\"/brochure\""], ["href=\"./book-a-consultation\"", "href=\"/contact\""],
+    ["Modern aesthetic and wellness care, with a gentle and personal approach.", "Surgical drapes, procedure packs, and non-woven disposables for hospitals and operating theatres."],
+    ["Start your journey", "Explore Our Products"], ["Our Services", "Our Products"],
+    ["Thoughtful care, chosen&nbsp;for&nbsp;you.", "Surgical products for procedure needs."],
+    ["We offer a carefully selected range of aesthetic and wellness treatments focused on natural results and long-term skin health.", "Explore surgical drapes, procedure packs, sterilization wrapping sheets, and non-woven disposables for hospitals and operating theatres."],
+    ["Skin Health", "General &amp; Specialty Surgical Drapes"], ["Aesthetic Care", "Procedure Packs"],
+    ["Wellness &amp; Recovery", "Sterilization Wrapping Sheets"], ["Personal Consultation", "Custom Drape Packs"],
+    ["Long-Term Care Plans", "Medical &amp; Surgical Disposables"],
+    ["Treatments designed to support balanced, healthy skin and maintain its natural strength over time.", "Explore surgical drape packs across general, gynecology, orthopedic, and specialty surgical categories."],
+    ["Subtle, non-invasive treatments designed to refresh your natural look without going to extremes.", "Discuss procedure-specific drape packs configured for operating-theatre requirements."],
+    ["Care that supports deep relaxation, gentle recovery, and overall well-being for body and mind.", "Review wrapping-sheet sizes, SMS material options, and pack quantities."],
+    ["A calm, one-on-one conversation to understand your goals and create a plan that fits you.", "Drape packs can be customized according to your procedure, pack contents, sizes, and packaging requirements."],
+    ["Thoughtful programs built around your skin and wellness needs, focused on lasting results.", "Enquire about covers, sheets, aprons, under pads, and related products."],
+    ["Tap to learn more", "View Products"], ["Click to learn more", "View Products"],
+    ["Your Care Journey.", "From requirements to enquiry."],
+    ["A simple, thoughtful process designed to understand your needs and guide you toward natural, lasting results.", "Tell us what your team needs so we can discuss suitable products and available options."],
+    ["Consultation.", "Share Your Requirements"],
+    ["We begin with a calm conversation to understand your goals and concerns before recommending the right approach.", "Tell us the procedure, product type, required quantity, and any size or pack preferences."],
+    ["Personalized Plan.", "Discuss Product Options"],
+    ["Based on your skin, lifestyle, and preferences, we create a thoughtful plan designed to support natural and balanced results.", "Ask about available drapes, kits, wrapping sheets, and customer-specific configurations."],
+    ["Treatment & Care.", "Request Your Quotation"],
+    ["Treatments are performed with precision and care, followed by guidance to support long-term skin health and maintain refined results.", "Contact our team to confirm specifications, commercial terms, and supply availability."],
+    ["Ready to begin your care?", "Looking for a specific drape pack?"],
+    ["Every step at Meter Surgicals starts with a conversation. Together, we create a plan that feels right for you", "Share your procedure and product requirements with Meter Surgicals."],
+    ["Book a consultation", "Discuss Your Requirements"],
+    ["Trusted by 80+ clients", "2010 · Year of incorporation"], ["+81", "India & Beyond"],
+    ["Excellent", "Domestic and international"], ["4.9 out of 5", "Customization"], ["TrustPoint", "Meter Surgicals"],
+    ["Our Approach", "About Meter Surgicals"], ["Bringing the pieces together.", "Surgical essentials. A focused purpose."],
+    ["Our approach is built by combining a few essential elements.", "Incorporated in 2010, Meter Surgicals manufactures surgical disposable products for healthcare providers in India and internationally."],
+    ["Listening first", "Quality & Hygiene"],
+    ["Every journey starts with a real conversation. We take time to understand your goals, your concerns, and what truly matters to you.", "A product focus shaped around the needs of hospitals and surgical environments."],
+    ["Careful choices", "Procedure-Based Range"],
+    ["We recommend only what makes sense for you. No trends, no pressure", "Explore general and specialty drape packs for different procedure requirements."],
+    ["Subtle results", "Customization Options"],
+    ["Our focus is on natural-looking outcomes. The goal is to help you look refreshed and feel confident, never overdone.", "Discuss customer-specific drape-pack requirements with our team."],
+    ["Long-term care", "Surgical Essentials"],
+    ["We think beyond quick fixes. Our approach supports your skin health and well-being over time, not just today.", "Find drapes, wrapping sheets, gowns, covers, and other non-woven disposables."],
+    ["What our clients say", "Product range highlights"], ["Pricing", "Product Enquiries"],
+    ["Thoughtful care, transparent pricing.", "Discuss your product requirements."],
+    ["Every treatment begins with a consultation so we can understand your goals and recommend what truly fits you.", "Contact us about product selection, pack configurations, quantities, and quotation requirements."],
+    ["Skin Health Consultation", "General Surgery Packs"],
+    ["A detailed skin assessment with personalized guidance to help you understand your skin and choose the most suitable care approach.", "Explore general, mini, universal, and other listed general-surgery packs."],
+    ["Aesthetic Treatments", "Specialty Drape Packs"],
+    ["Subtle, non-invasive treatments designed to refresh your appearance while maintaining natural, balanced results.", "Discuss procedure-specific options across the brochure's specialty categories."],
+    ["Wellness & Recovery", "Wrapping Sheets"],
+    ["Relaxing treatments that support recovery, reduce tension, and restore a natural sense of balance for body and mind.", "Ask about listed sizes, SMS material options, and pack quantities."],
+    ["Personal Care Plan", "Surgical Disposables"],
+    ["A tailored program combining treatments and professional guidance to support long-term skin health and well-being.", "Enquire about covers, sheets, aprons, under pads, and related products."],
+    ["Final pricing may vary depending on your personal consultation and treatment plan.", "Product specifications, availability, quantities, and commercial terms must be confirmed with Meter Surgicals."],
+    ["Book your consultation", "Request a Quote"], ["Insights for thoughtful care.", "Product information"],
+    ["Notes on skin health, aesthetic treatments, and simple ways to support long-term&nbsp;well-being.", "Browse product categories and specifications featured in the Meter Surgicals brochure."],
+    ["How Professional Guidance Makes a Difference.", "General Surgery Drapes."],
+    ["A closer look at why personal assessment matters and how tailored care supports refined outcomes.", "General, mini, universal, Hb SAG, and HIV protection drape packs, with customization available on request."],
+    ["Hydration Beyond Moisturizer.", "Gynecology Surgery Drapes."],
+    ["An overview of internal and external hydration, what truly supports moisture retention, and how to maintain it daily.", "LSCS, delivery, DNC, and perineal drape kits, hystro lap pouches, and maternity mats."],
+    ["Explore more articles in our Journal and discover practical insights for thoughtful, long-term care.", "Explore product categories and specifications in the Meter Surgicals brochure."],
+    ["Browse insights", "View Product Range"],
+    ["Your questions, answered.", "Product enquiries"],
+    ["Everything you need to know before booking&nbsp;your&nbsp;visit.", "Contact Meter Surgicals about products, specifications, pack requirements, and quotations."],
+    ["A quiet note from Althea.", "Contact Meter Surgicals"],
+    ["Occasional updates on skin health, thoughtful care, and simple ways to support your well&nbsp;being.", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com."],
+    ["Enter your email", "Email Meter Surgicals"], ["hello@world.com", "metersurgicals@gmail.com"],
+    ["Send us an email", "metersurgicals@gmail.com"], ["connect with us on social", "or call +91 89254 99953"],
+    ["from $120", "Enquire"], ["from $250", "Enquire"], ["from $180", "Enquire"], ["from $350", "Enquire"],
+    ["$120", "Enquire"], ["$250", "Enquire"], ["$180", "Enquire"], ["$350", "Enquire"],
+    ["TrustScore&nbsp;4.9&nbsp;&nbsp;245&nbsp;reviews", "Meter Surgicals product range"], ["245&nbsp;reviews", "Meter Surgicals"],
+    ["how-professional-guidance-makes-a-difference", "general-surgery-drapes"], ["hydration-beyond-moisturizer", "gynecology-surgery-drapes"],
+    ["Aesthetic &amp; Wellness", "Surgical Drapes &amp; Disposables"],
+    ["Get this template", "Meter Surgicals"], ["from $129", ""], ["Anton Drukarov", "Meter Surgicals"],
+    ["https://templatoria.com/", "/"], ["https://framer.link/drukarov", "/"], ["https://buy.polar.sh/", "/contact"],
+    ["Dr. Eva Laurent", "Meter Surgicals"], ["hello@altheacare.com", "metersurgicals@gmail.com"], ["hello@altheaclinic.com", "metersurgicals@gmail.com"],
+    ["Do I need a consultation before any treatment?", "Which products are listed in the brochure?"],
+    ["Yes. Every treatment at Althea starts with a personal consultation. This gives us time to understand your goals, your concerns, and your skin or wellness needs.", "The brochure lists surgical drapes and kits, surgeon gowns, disposable bed sheets, sterilization wrapping sheets, and other non-woven disposable products for hospitals and operation theatres."],
+    ["Are the results natural-looking?", "Can drape packs be customized?"],
+    ["Yes. Our approach is focused on subtle, natural results. The goal is to help you look refreshed and feel confident, not overdone.", "The brochure notes selected drape packs can be customized as per customer request. Confirm requirements with Meter Surgicals."],
+    ["Do you offer wellness treatments as well as aesthetic ones?", "Which wrapping-sheet specifications are listed?"],
+    ["Yes. Althea combines aesthetic care with wellness-focused treatments that support relaxation, recovery, and overall balance.", "Sizes listed are 50 × 50 cm, 60 × 60 cm, 75 × 75 cm, and 90 × 90 cm. Customized sizes use 43/50 GSM SMS fabric and are available in packs of 25 or 50."],
+    ["How can I book an appointment?", "How can I contact Meter Surgicals?"],
+    ["You can book your consultation online through our booking page or contact us directly if you have questions first.", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com. Address: No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091."],
+    ["Are the treatments safe?", "What details should I share for a product enquiry?"],
+    ["Your safety is always our priority. We work with professional standards, proven methods, and carefully chosen treatments designed for long-term skin health and well-being.", "Share the procedure, product type, required quantity, and any size or pack preferences with our team."],
+    ["How do I know which treatment is right for me?", "How can I request a quotation?"],
+    ["You don’t need to decide alone. During your consultation, we listen to your goals and concerns and create a personal plan that makes sense for you.", "Contact Meter Surgicals to confirm product specifications, commercial terms, and supply availability."],
+    ["Is there any pressure to book a treatment?", "Can I ask about product availability and commercial terms?"],
+    ["No. We believe good care starts with trust and honest advice. The consultation is about understanding your options, not pushing you into decisions.", "Yes. Product specifications, availability, quantities, and commercial terms must be confirmed with Meter Surgicals."],
+    ["What should I expect during my first visit?", "Which products are available for different procedures?"],
+    ["Your first visit starts with a calm, personal consultation. We talk about your goals, your skin or wellness concerns, and any questions you may have. From there, we suggest a thoughtful plan that fits you, without pressure and without rushing into decisions.", "The brochure lists general, gynecology, orthopedic, and specialty surgery drapes, plus wrapping sheets and other medical and surgical disposables."],
+    ["Didn’t find what you were looking for? Get in touch and let’s sort it out.", "Need product information or a quotation? Contact Meter Surgicals."],
   ];
-  return replacements.reduce((html, [from, to]) => html.replaceAll(from, to), source);
+  let html = replacements.reduce((content, [from, to]) => content.replaceAll(from, to), source);
+  html = html.replace(/Every step at Meter Surgicals starts with a conversation\.[^<]*/g, "Share your procedure and product requirements with Meter Surgicals.");
+  const slides = [
+    ["consultation felt", "General & Specialty Drapes", "Explore drape packs across general, gynecology, orthopedic, and specialty surgical categories."],
+    ["whole experience felt", "Customer-Specific Packs", "Discuss customer-specific drape-pack requirements with our team."],
+    ["consultation was very thoughtful", "Sterilization Wrapping Sheets", "Review listed wrapping-sheet sizes, SMS material options, and pack quantities."],
+    ["calm atmosphere and clear explanations", "Medical & Surgical Disposables", "Enquire about covers, sheets, aprons, under pads, and related products."],
+    ["looking for something natural", "General & Specialty Drapes", "Explore drape packs across general, gynecology, orthopedic, and specialty surgical categories."],
+  ];
+  html = html.replace(/(<h4\b[^>]*>)([\s\S]*?)(<\/h4>)/g, (full, open, text, close) => {
+    const slide = slides.find(([match]) => text.includes(match));
+    return slide ? `${open}${slide[1]}${close}` : full;
+  });
+  const credits = [["Emma L.", slides[0][2]], ["Sofia M.", slides[1][2]], ["Laura P.", slides[2][2]], ["Isabelle R.", slides[3][2]], ["Anna K.", slides[0][2]]];
+  html = html.replace(/(<p\b[^>]*>)([\s\S]*?)(<\/p>)/g, (full, open, text, close) => {
+    const credit = credits.find(([name]) => text.includes(name));
+    return credit ? `${open}${credit[1]}${close}` : full;
+  });
+  return html;
 }
-
 export default function Home() {
   const html = useRef(adaptContent(framerHtml));
 
@@ -62,13 +130,70 @@ export default function Home() {
     const services = document.getElementById("our-services");
     if (quote) cleanups.push(initQuoteReveal(quote));
     if (services) cleanups.push(initServicesWheel(services));
+    const carouselWheel = services?.querySelector<HTMLElement>('div[style*="width:4100px"], div[style*="width: 4100px"]');
+    const carouselActions = ["View Products", "Request a Quote", "View Brochure", "Request a Quote", "Request a Quote"];
+    carouselWheel?.querySelectorAll<HTMLElement>(":scope > div").forEach((card, index) => {
+      const actionText = carouselActions[index];
+      if (!actionText) return;
+      // Set the CTA text on the card's link element regardless of current text
+      const ctaLinks = card.querySelectorAll<HTMLElement>("a");
+      ctaLinks.forEach((link) => {
+        const textEl = link.querySelector("p, strong, span");
+        if (textEl) textEl.textContent = actionText;
+        else if (link.childElementCount === 0) link.textContent = actionText;
+      });
+    });
     const heroTitle = document.querySelector<HTMLElement>(".framer-m3elfi h1, .framer-DFt9Q h1");
     if (heroTitle) heroTitle.textContent = "Surgical drapes. Trusted care.";
-    const productImages = ["/meter/sterilization-sheets.jpg", "/meter/general-drape-pack.jpg", "/meter/gynecology-drapes.jpg", "/meter/orthopedic-drapes.jpg", "/meter/other-drapes.jpg"];
+    const hero = document.getElementById("hero");
+    const heroMessage = hero?.querySelector<HTMLElement>(".framer-eo1y6");
+    if (heroMessage) {
+      heroMessage.querySelectorAll(".meter-hero-eyebrow").forEach((item) => item.remove());
+      const heroCopy = Array.from(heroMessage.querySelectorAll<HTMLElement>("p")).find((item) => !item.closest("a"));
+      heroCopy?.remove();
+      const primary = heroMessage.querySelector<HTMLAnchorElement>("a");
+      if (primary) primary.href = "/products";
+      heroMessage.querySelector('a[href="/meter/meter-surgicals-drapes.pdf"]')?.remove();
+    }
+    document.querySelectorAll<HTMLElement>(".framer-1sdbrz5-container").forEach((headerCta) => {
+      headerCta.querySelectorAll("p, strong").forEach((label) => { label.textContent = "Request a Quote"; });
+    });
+    document.querySelectorAll<HTMLElement>(".framer-3mmeed").forEach((stats) => {
+      stats.replaceChildren();
+      stats.classList.add("meter-factual-stats");
+      [["2010", "Year of incorporation"], ["India & Beyond", "Domestic and international providers"], ["Customization", "Drape packs to customer requirements"]].forEach(([value, caption]) => {
+        const item = document.createElement("div");
+        const strong = document.createElement("strong");
+        const small = document.createElement("span");
+        strong.textContent = value;
+        small.textContent = caption;
+        item.append(strong, small);
+        stats.appendChild(item);
+      });
+    });
+    const enquiryCta = Array.from(document.querySelectorAll<HTMLElement>("section")).find((section) => section.textContent?.includes("Looking for a specific drape pack?"));
+    enquiryCta?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => { link.textContent = "Discuss Your Requirements"; link.href = "/contact"; });
+    document.querySelectorAll<HTMLAnchorElement>("#pricing a").forEach((link, index) => {
+      const labels = ["Enquire About Packs", "Discuss Requirements", "Request Specifications", "Request a Quote"];
+      if (index < 16) { link.textContent = labels[index % labels.length]; link.href = "/contact"; }
+    });
+    document.querySelectorAll<HTMLFormElement>(".framer-h1bpuk").forEach((footerForm) => {
+      const contact = document.createElement("div");
+      contact.className = "meter-footer-contact-info";
+      contact.innerHTML = '<a href="tel:+918925499953">+91 89254 99953</a><a href="tel:+919344991323">+91 93449 91323</a><a href="mailto:metersurgicals@gmail.com">metersurgicals@gmail.com</a><p>No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091</p>';
+      footerForm.replaceWith(contact);
+    });
+    const productImages = ["/meter/general-drape-pack.jpg", "/meter/gynecology-drapes.jpg", "/meter/orthopedic-drapes.jpg", "/meter/other-drapes.jpg", "/meter/sterilization-sheets.jpg"];
     services?.querySelectorAll<HTMLImageElement>("img").forEach((image, index) => {
       image.src = productImages[Math.floor(index / 2) % productImages.length];
       image.removeAttribute("srcset");
     });
+    if (services && !services.nextElementSibling?.classList.contains("meter-product-range-cta")) {
+      const rangeCta = document.createElement("section");
+      rangeCta.className = "meter-product-range-cta";
+      rangeCta.innerHTML = '<a href="/products">View Product Range</a>';
+      services.insertAdjacentElement("afterend", rangeCta);
+    }
     const timer = window.setTimeout(() => cleanups.push(initScrollFadeIn()), 60);
     return () => {
       window.clearTimeout(timer);
@@ -76,5 +201,11 @@ export default function Home() {
     };
   }, []);
 
-  return <><div dangerouslySetInnerHTML={{ __html: html.current }} /><HomeCrossPortal /></>;
+  return <>
+    <div dangerouslySetInnerHTML={{ __html: html.current }} />
+    <HomeCrossPortal />
+    <section className="page-end-image" aria-label="Meter Surgicals">
+      <img src="/page-end.png" alt="Meter Surgicals page artwork" />
+    </section>
+  </>;
 }

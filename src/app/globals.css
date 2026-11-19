@@ -10707,3 +10707,284 @@ img[src*="POpTLGuLzTuWYxuEYrRGJD678"] {
   #our-services .framer-olj65c-container{margin-top:24px!important}
 }
 
+
+/* Brand-wide text tokens with stronger contrast for light backgrounds. */
+body {
+  --token-dcd16b3e-ab7e-461f-8999-c68b440ef1a4: #142b38;
+  --token-5888bf1a-8ee2-4dee-95ab-bc10cfb97142: #4c5b66;
+  --token-a60debed-6b2e-4b06-b20d-076991233c4c: #5c6872;
+}
+
+/* Home hero: clear surgical illustration with a restrained bottom dissolve. */
+#hero {
+  height: 100vh;
+  min-height: 680px;
+  background-color: #e7eefb;
+  background-image:
+    url('/hero-surgeons-hd.png');
+  background-size: 72% auto;
+  background-position: center 8%;
+  background-repeat: no-repeat;
+}
+
+#hero .framer-eo1y6 {
+  gap: clamp(22px, 3vw, 40px) !important;
+  text-align: center !important;
+  z-index: 4 !important;
+}
+#hero .framer-eo1y6 h1 {
+  width: 100%;
+  max-width: 1420px;
+  margin-inline: auto;
+  color: #102736 !important;
+  font-family: "Instrument Serif", "Instrument Serif Placeholder", serif !important;
+  font-size: clamp(44px, 6.5vw, 124px) !important;
+  font-weight: 400 !important;
+  letter-spacing: -.015em !important;
+  line-height: 1.04 !important;
+  text-align: center !important;
+  text-wrap: balance;
+  white-space: normal !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .98), 0 0 18px rgba(255, 255, 255, .96), 0 4px 26px rgba(255, 255, 255, .82) !important;
+}
+#hero .framer-eo1y6 h1 span {
+  white-space: normal !important;
+}
+#hero .framer-eo1y6 p {
+  max-width: 620px;
+  color: #1c3441 !important;
+  font-family: "Inter Display", Arial, sans-serif !important;
+  font-size: clamp(15px, 1.25vw, 18px) !important;
+  font-weight: 600 !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, .98), 0 0 13px rgba(255, 255, 255, .95), 0 2px 20px rgba(255, 255, 255, .76) !important;
+}
+
+.framer-16lf0oi canvas {
+  filter: drop-shadow(0 14px 30px rgba(35, 54, 76, .2));
+}
+#hero .framer-eo1y6 a {
+  color: #fff !important;
+  cursor: pointer;
+  transition: filter .2s ease, box-shadow .2s ease;
+}
+#hero .framer-eo1y6 a p,
+#hero .framer-eo1y6 a strong,
+#hero .framer-eo1y6 a span {
+  color: #fff !important;
+  text-shadow: 0 1px 3px rgba(8, 24, 38, .72) !important;
+}
+#hero .framer-eo1y6 a:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .5), 0 8px 24px rgba(25, 35, 55, .3);
+}
+#hero .framer-eo1y6 a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+/* Keep only the brand link and top-right contact CTA in the fixed header. */
+.framer-UYKUh .framer-1bkdobw-container {
+  display: none !important;
+}
+.framer-UYKUh .framer-1sdbrz5-container {
+  display: block !important;
+}
+
+@media (min-width: 1200px) {
+  .framer-DFt9Q .framer-eo1y6 {
+    top: 62% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+@media (min-width: 810px) and (max-width: 1199.98px) {
+  #hero {
+    min-height: 640px;
+    background-position: center 48%;
+  }
+  .framer-DFt9Q .framer-eo1y6 {
+    transform: translateY(0) !important;
+  }
+}
+@media (max-width: 809.98px) {
+  #hero {
+    height: 100svh;
+    min-height: 650px;
+    background-position: center 42%;
+  }
+  #hero .framer-eo1y6 {
+    gap: 24px !important;
+    padding-inline: 22px;
+    transform: translateY(0) !important;
+  }
+  #hero .framer-eo1y6 h1 {
+    max-width: 560px;
+    font-size: clamp(42px, 11vw, 72px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.02em !important;
+  }
+  #hero .framer-eo1y6 p {
+    max-width: 430px;
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+  }
+  .framer-UYKUh .framer-fd3k86 {
+    top: 18px !important;
+    left: 16px !important;
+    transform: scale(.7);
+    transform-origin: top left;
+  }
+  .framer-UYKUh .framer-1sdbrz5-container {
+    top: 18px !important;
+    right: 14px !important;
+    transform: scale(.78);
+    transform-origin: top right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #hero .framer-eo1y6 a {
+    transition: none;
+  }
+}
+
+/* Restore the clean, original Meter Surgicals landing hero. */
+#hero {
+  overflow: hidden !important;
+  background-color: #edf4fa !important;
+  background-image:
+    radial-gradient(ellipse at 50% 48%, rgba(255,255,255,.99) 0%, rgba(248,251,253,.98) 34%, rgba(227,236,248,.94) 100%),
+    linear-gradient(115deg, rgba(208,222,241,.45), transparent 38%, rgba(205,220,240,.35)) !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: min(94vw, 1380px);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 59%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(183, 204, 232, .26);
+  border-radius: 50%;
+  box-shadow: 0 0 0 92px rgba(183,204,232,.045), 0 0 0 184px rgba(183,204,232,.035), 0 0 0 276px rgba(183,204,232,.025);
+  pointer-events: none;
+}
+
+/* The template hero includes a photo/video panel; the original is an open gradient. */
+#hero img,
+#hero video,
+#hero [data-framer-background-image-wrapper],
+#hero [data-framer-background-video-wrapper] {
+  display: none !important;
+}
+
+#hero .framer-eo1y6 {
+  top: 55% !important;
+  z-index: 5 !important;
+  gap: 28px !important;
+}
+
+#hero .framer-eo1y6 h1 {
+  color: #343434 !important;
+  text-shadow: none !important;
+  font-size: clamp(48px, 6.35vw, 118px) !important;
+}
+
+#hero .framer-eo1y6 > p {
+  color: #3e4145 !important;
+  font-weight: 450 !important;
+  text-shadow: none !important;
+}
+
+#hero .framer-eo1y6 a {
+  background: #606071 !important;
+  box-shadow: none !important;
+}
+
+#hero .framer-eo1y6 a:hover {
+  background: #4e4e60 !important;
+}
+
+.meter-hero-eyebrow {
+  margin: 0 0 -8px !important;
+  color: #59606c !important;
+  font: 600 12px/1.4 "Inter Display", Arial, sans-serif !important;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-shadow: none !important;
+}
+
+#hero .meter-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(52,54,74,.2);
+  background: rgba(255,255,255,.55);
+  color: #34364a !important;
+  font: 600 14px/1 "Inter Display", Arial, sans-serif;
+  text-decoration: none;
+  text-shadow: none !important;
+}
+
+#hero .meter-hero-secondary:hover { background: #fff; }
+
+.meter-factual-stats {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+  max-width: 860px;
+  margin: 26px auto 0;
+}
+
+.meter-factual-stats > div { display: grid; gap: 7px; text-align: center; }
+.meter-factual-stats strong { color: #34364a; font: 400 clamp(20px, 2.3vw, 30px)/1.1 "Instrument Serif", Georgia, serif; }
+.meter-factual-stats span { color: #697280; font: 400 12px/1.5 "Inter Display", Arial, sans-serif; }
+
+.meter-footer-contact-info { display: grid; justify-items: center; gap: 8px; margin: 0 auto; text-align: center; }
+.meter-footer-contact-info a { color: inherit; text-decoration: none; }
+.meter-footer-contact-info p { max-width: 520px; margin: 5px auto 0; line-height: 1.6; }
+
+.meter-product-range-cta { padding: 26px 24px; text-align: center; }
+.meter-product-range-cta a { display: inline-flex; align-items: center; min-height: 50px; padding: 0 24px; border-radius: 999px; background: #34364a; color: #fff; font: 500 13px/1 "Inter Display", Arial, sans-serif; text-decoration: none; transition: background .2s ease, transform .2s ease; }
+.meter-product-range-cta a:hover { background: #4c4e62; transform: translateY(-2px); }
+
+.page-end-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #edf4fa;
+  line-height: 0;
+}
+
+.page-end-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 91%, transparent 100%);
+}
+
+@media (max-width: 809.98px) {
+  #hero .framer-eo1y6 {
+    top: 54% !important;
+  }
+
+  #hero::before {
+    width: 150vw;
+    top: 61%;
+    box-shadow: 0 0 0 50px rgba(183,204,232,.045), 0 0 0 100px rgba(183,204,232,.035);
+  }
+
+  .meter-factual-stats { grid-template-columns: 1fr; gap: 16px; }
+}

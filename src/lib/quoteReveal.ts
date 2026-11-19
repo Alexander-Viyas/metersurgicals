@@ -1,9 +1,10 @@
 const WORDS = [
-  '\u201CMeter', 'Surgicals', 'is', 'a', 'CE-certified', 'manufacturer', 'of', 'surgical',
-  'disposables.', 'Our', 'range', 'includes', 'procedure', 'drapes,', 'kits,', 'wrapping',
-  'sheets,', 'gowns,', 'and', 'other', 'non-woven', 'products', 'for', 'hospitals', 'and',
-  'operating', 'theatres.', 'Incorporated', 'in', '2010,', 'we', 'serve', 'healthcare',
-  'providers', 'in', 'India', 'and', 'around', 'the', 'world.\u201D'
+  'Incorporated', 'in', '2010,', 'Meter', 'Surgicals', 'manufactures', 'surgical',
+  'disposable', 'products', 'for', 'healthcare', 'providers', 'in', 'India', 'and',
+  'internationally.', 'Our', 'range', 'includes', 'surgical', 'drapes', 'and', 'kits,',
+  'surgeon', 'gowns,', 'disposable', 'bed', 'sheets,', 'sterilization', 'wrapping',
+  'sheets,', 'and', 'other', 'non-woven', 'disposables', 'for', 'hospitals', 'and',
+  'operating', 'theatres.'
 ];
 
 export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
@@ -102,17 +103,48 @@ export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
     if (word !== WORDS[WORDS.length - 1]) heading.appendChild(document.createTextNode(" "));
     spans.push(s);
   });
+  const eyebrow = document.createElement("p");
+  eyebrow.textContent = "About Meter Surgicals";
+  eyebrow.style.fontFamily = '"Inter Display", sans-serif';
+  eyebrow.style.fontSize = "12px";
+  eyebrow.style.letterSpacing = ".14em";
+  eyebrow.style.textTransform = "uppercase";
+  eyebrow.style.color = "var(--token-a60debed-6b2e-4b06-b20d-076991233c4c)";
+  eyebrow.style.margin = "0 0 20px";
+  stage.appendChild(eyebrow);
+
+  const title = document.createElement("h2");
+  title.textContent = "Surgical essentials. A focused purpose.";
+  title.style.fontFamily = '"Instrument Serif", Georgia, serif';
+  title.style.fontSize = "clamp(38px, 6vw, 72px)";
+  title.style.fontWeight = "400";
+  title.style.lineHeight = "1.02";
+  title.style.letterSpacing = "-.03em";
+  title.style.margin = "0 0 24px";
+  title.style.color = "rgb(35, 38, 45)";
+  stage.appendChild(title);
   stage.appendChild(heading);
 
-  // Founder line
+  const purpose = document.createElement("p");
+  purpose.textContent = "Our purpose is to support quality, hygiene, and infection-control practices in surgical environments through disposable surgical-care products.";
+  purpose.style.fontFamily = '"Inter Display", sans-serif';
+  purpose.style.fontSize = "15px";
+  purpose.style.lineHeight = "1.7";
+  purpose.style.maxWidth = "720px";
+  purpose.style.margin = "30px auto 0";
+  purpose.style.opacity = "0";
+  purpose.style.transition = "opacity 0.4s ease-out";
+  stage.appendChild(purpose);
+
+  // Company attribution
   const founder = document.createElement("div");
-  founder.style.marginTop = "56px";
+  founder.style.marginTop = "32px";
   founder.style.opacity = "0";
   founder.style.transform = "translateY(12px)";
   founder.style.transition = "opacity 0.4s ease-out, transform 0.4s ease-out";
 
   const founderP = document.createElement("p");
-  founderP.textContent = "Dr. Eva Laurent \u2014 Founder";
+  founderP.textContent = "Meter Surgicals";
   founderP.style.fontFamily = '"Inter Display", "Inter Display Placeholder", sans-serif';
   founderP.style.fontSize = "15px";
   founderP.style.fontWeight = "400";
@@ -123,6 +155,22 @@ export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
   founderP.style.margin = "0";
   founder.appendChild(founderP);
   stage.appendChild(founder);
+
+  const aboutLink = document.createElement("a");
+  aboutLink.href = "/about";
+  aboutLink.textContent = "About Our Company";
+  aboutLink.style.display = "inline-block";
+  aboutLink.style.marginTop = "20px";
+  aboutLink.style.padding = "13px 22px";
+  aboutLink.style.borderRadius = "999px";
+  aboutLink.style.background = "#34364a";
+  aboutLink.style.color = "#fff";
+  aboutLink.style.fontFamily = '"Inter Display", sans-serif';
+  aboutLink.style.fontSize = "13px";
+  aboutLink.style.textDecoration = "none";
+  aboutLink.style.opacity = "0";
+  aboutLink.style.transition = "opacity 0.4s ease-out";
+  stage.appendChild(aboutLink);
 
   sticky.appendChild(stage);
   runway.appendChild(sticky);
@@ -164,9 +212,13 @@ export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
       const ft = Math.min(1, (p - 0.88) / 0.1);
       founder.style.opacity = ft.toFixed(3);
       founder.style.transform = `translateY(${((1 - ft) * 12).toFixed(1)}px)`;
+      purpose.style.opacity = ft.toFixed(3);
+      aboutLink.style.opacity = ft.toFixed(3);
     } else {
       founder.style.opacity = "0";
       founder.style.transform = "translateY(12px)";
+      purpose.style.opacity = "0";
+      aboutLink.style.opacity = "0";
     }
   };
 

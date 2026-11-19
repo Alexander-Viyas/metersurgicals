@@ -1,5 +1,5 @@
-import { JournalPage } from "@/components/ClinicPages";
+import { BrochurePage } from "@/components/ClinicPages";
 
 export default function Page() {
-  return <JournalPage />;
+  return <BrochurePage />;
 }
