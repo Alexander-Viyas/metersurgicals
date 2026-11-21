@@ -158,8 +158,8 @@ export function initServicesWheel(servicesContainer: HTMLElement): () => void {
   let dragStartAngle = -140;
   let animId: number;
 
-  // Configure individual cards inside wheel
-  const cardDivs = wheel.querySelectorAll<HTMLElement>(":scope > div");
+  // Configure the product cards nested inside the wheel's positioning wrappers.
+  const cardDivs = wheel.querySelectorAll<HTMLElement>('[data-framer-name="Main Page Service Card"]');
   cardDivs.forEach((card, idx) => {
     card.style.cursor = "pointer";
     card.addEventListener("click", () => {

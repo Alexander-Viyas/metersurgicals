@@ -7,12 +7,66 @@ import { initQuoteReveal } from "@/lib/quoteReveal";
 import { initServicesWheel } from "@/lib/servicesWheel";
 import { initScrollFadeIn } from "@/lib/scrollFadeIn";
 
+const brochureCategories = [
+  {
+    title: "Sterilization Wrapping Sheets",
+    image: "/meter/sterilization-sheets.jpg",
+    summary: "Standard and customized SMS wrapping sheets for sterilization.",
+    products: ["50 × 50 cm", "60 × 60 cm", "75 × 75 cm", "90 × 90 cm", "Customized sizes in 43/50 GSM SMS fabric; packs of 25 or 50."],
+  },
+  {
+    title: "General Surgery Drapes",
+    image: "/meter/general-drape-pack.jpg",
+    summary: "General, Mini, Universal, Hb SAG, and HIV Protection drape packs.",
+    products: ["General Surgical Drape Pack", "Mini Drape Pack", "Universal Drape Pack", "Hb SAG Drape Pack", "HIV Protection Drape Kit"],
+    note: "The HIV Protection Drape Kit can be customized as per customer request.",
+  },
+  {
+    title: "Gynecology Surgery Drapes",
+    image: "/meter/gynecology-drapes.jpg",
+    summary: "Drape packs and kits for gynecology and maternity procedures.",
+    products: ["LSCS Drape Pack", "Delivery Drape Pack", "DNC Drape Kit", "Hystro Lap Pouch", "Perineal Drape Kit", "Maternity Mat"],
+    note: "Customization is available as per customer request.",
+  },
+  {
+    title: "Orthopedic Surgery Drapes",
+    image: "/meter/orthopedic-drapes.jpg",
+    summary: "Orthopedic, replacement, and arthroscopy drape packs.",
+    products: ["Ortho Drape Pack (5-gown and 3-gown options)", "Knee O Drape", "Hip U Drape", "Knee Arthroscopy", "TKR Total Knee Replacement Drape Pack", "THR Total Hip Replacement Drape Pack", "Shoulder Arthroscopy"],
+    note: "Customization is available as per customer request.",
+  },
+  {
+    title: "Other Surgery Drapes",
+    image: "/meter/other-drapes.jpg",
+    summary: "Specialty drape packs for a broad range of surgical procedures.",
+    products: ["CABG Drape Packs", "Angio Drape Packs", "LAVH Drape Kit", "Renal Transplant Packs", "Cystoscopy Drape Packs", "Embryo Transplant Packs", "Egg Collection Packs", "Urology Drape Packs", "IVF Drape Packs", "OCR-ET Packs", "Neurology Drape Packs", "Laparoscopy Drape Packs", "Other Customized Drape Packs", "PCNL Drape", "TURP Drape"],
+    note: "Drape packs can be customized as per customer request.",
+  },
+  {
+    title: "Other Medical & Surgical Disposables",
+    summary: "Additional disposable products featured in the brochure.",
+    products: ["Large Sheet", "Center Hole Sheet", "Mayo Cover", "C-Arm Cover", "Leggings", "Camera Cover", "Shoe Cover", "Trolley Sheet", "Apron", "Under Pad"],
+  },
+] as const;
+
+const brochureQuestions = [
+  ["Which products are listed in the brochure?", "The brochure lists sterilization wrapping sheets; general, gynecology, orthopedic, and other surgery drapes; and other medical and surgical disposables."],
+  ["Which wrapping-sheet sizes and specifications are listed?", "Standard sizes are 50 × 50 cm, 60 × 60 cm, 75 × 75 cm, and 90 × 90 cm. Customized sizes use 43/50 GSM SMS fabric and come in packs of 25 or 50."],
+  ["Can drape packs be customized?", "The brochure notes customization as per customer request for selected packs. Contact Meter Surgicals with your procedure and pack requirements."],
+  ["Which other medical and surgical disposables are shown?", "Large Sheet, Center Hole Sheet, Mayo Cover, C-Arm Cover, Leggings, Camera Cover, Shoe Cover, Trolley Sheet, Apron, and Under Pad."],
+  ["What should I include in a product enquiry?", "Share the procedure, product type, required quantity, and any size or pack preferences."],
+  ["How can I contact Meter Surgicals?", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com."],
+];
+
 function adaptContent(source: string) {
   const replacements: [string, string][] = [
     ["Althea", "Meter Surgicals"], ["Journal", "Brochure"], ["Services", "Products"],
+    ["https://framerusercontent.com/images/AYmhm7fQptPoF2bCQsLfIJDi0U4.jpg", "/meter/surgical-suturing.jpg"],
+    ["https://framerusercontent.com/images/Iygm9WFensHwXXoe01QWLQ0iF78.jpg", "/meter/surgical-instrument-clamp.jpg"],
+    ["https://framerusercontent.com/images/AFEMnkblR75GU9bwfRpmzlqBpQ.jpg", "/meter/surgical-care-disposables.jpg"],
     ["Our Journal", "Product Brochure"],
-    ["href=\"./about\"", "href=\"/about\""], ["href=\"./services\"", "href=\"/products\""],
-    ["href=\"./journal\"", "href=\"/brochure\""], ["href=\"./book-a-consultation\"", "href=\"/contact\""],
+    ["href=\"./about\"", "href=\"/#our-approach\""], ["href=\"./services\"", "href=\"/#our-services\""],
+    ["href=\"./journal\"", "href=\"/#journal-preview\""], ["href=\"./book-a-consultation\"", "href=\"/#ready-to-begin\""],
     ["Modern aesthetic and wellness care, with a gentle and personal approach.", "Surgical drapes, procedure packs, and non-woven disposables for hospitals and operating theatres."],
     ["Start your journey", "Explore Our Products"], ["Our Services", "Our Products"],
     ["Thoughtful care, chosen&nbsp;for&nbsp;you.", "Surgical products for procedure needs."],
@@ -126,22 +180,45 @@ export default function Home() {
 
   useEffect(() => {
     const cleanups: (() => void)[] = [];
+    const routeTargets: Record<string, string> = {
+      "/about": "#our-approach",
+      "/products": "#our-services",
+      "/services": "#our-services",
+      "/brochure": "#journal-preview",
+      "/journal": "#journal-preview",
+      "/contact": "#ready-to-begin",
+    };
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((link) => {
+      const target = routeTargets[link.getAttribute("href") ?? ""];
+      if (target) link.href = target;
+    });
     const quote = document.getElementById("quote");
     const services = document.getElementById("our-services");
     if (quote) cleanups.push(initQuoteReveal(quote));
     if (services) cleanups.push(initServicesWheel(services));
-    const carouselWheel = services?.querySelector<HTMLElement>('div[style*="width:4100px"], div[style*="width: 4100px"]');
-    const carouselActions = ["View Products", "Request a Quote", "View Brochure", "Request a Quote", "Request a Quote"];
-    carouselWheel?.querySelectorAll<HTMLElement>(":scope > div").forEach((card, index) => {
-      const actionText = carouselActions[index];
-      if (!actionText) return;
-      // Set the CTA text on the card's link element regardless of current text
-      const ctaLinks = card.querySelectorAll<HTMLElement>("a");
-      ctaLinks.forEach((link) => {
-        const textEl = link.querySelector("p, strong, span");
-        if (textEl) textEl.textContent = actionText;
-        else if (link.childElementCount === 0) link.textContent = actionText;
-      });
+    const carouselOrder = [1, 2, 3, 4, 0] as const;
+    services?.querySelectorAll<HTMLElement>("h4").forEach((heading, index) => {
+      const categoryIndex = carouselOrder[index % carouselOrder.length];
+      const category = categoryIndex === undefined ? undefined : brochureCategories[categoryIndex];
+      if (!category || categoryIndex === undefined) return;
+      heading.textContent = category.title;
+      const cardLink = heading.closest<HTMLAnchorElement>("a");
+      const textContainer = cardLink ?? heading.closest<HTMLElement>('[data-framer-name="Text Container"]');
+      const paragraphs = Array.from(textContainer?.querySelectorAll<HTMLElement>("p") ?? []);
+      if (paragraphs[0]) paragraphs[0].textContent = category.summary;
+      if (paragraphs.length > 1) paragraphs[paragraphs.length - 1].textContent = "Explore products";
+      if (cardLink) cardLink.href = "#journal-preview";
+    });
+    services?.querySelectorAll<HTMLElement>('[data-framer-name="Icon Container"]').forEach((imageContainer, index) => {
+      const categoryIndex = carouselOrder[index % carouselOrder.length];
+      const category = categoryIndex === undefined ? undefined : brochureCategories[categoryIndex];
+      if (!category) return;
+      const image = document.createElement("img");
+      image.className = "meter-product-carousel-image";
+      image.src = category.image;
+      image.alt = category.title;
+      image.loading = "lazy";
+      imageContainer.replaceChildren(image);
     });
     const heroTitle = document.querySelector<HTMLElement>(".framer-m3elfi h1, .framer-DFt9Q h1");
     if (heroTitle) heroTitle.textContent = "Surgical drapes. Trusted care.";
@@ -152,7 +229,7 @@ export default function Home() {
       const heroCopy = Array.from(heroMessage.querySelectorAll<HTMLElement>("p")).find((item) => !item.closest("a"));
       heroCopy?.remove();
       const primary = heroMessage.querySelector<HTMLAnchorElement>("a");
-      if (primary) primary.href = "/products";
+      if (primary) primary.href = "#our-services";
       heroMessage.querySelector('a[href="/meter/meter-surgicals-drapes.pdf"]')?.remove();
     }
     document.querySelectorAll<HTMLElement>(".framer-1sdbrz5-container").forEach((headerCta) => {
@@ -172,10 +249,40 @@ export default function Home() {
       });
     });
     const enquiryCta = Array.from(document.querySelectorAll<HTMLElement>("section")).find((section) => section.textContent?.includes("Looking for a specific drape pack?"));
-    enquiryCta?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => { link.textContent = "Discuss Your Requirements"; link.href = "/contact"; });
-    document.querySelectorAll<HTMLAnchorElement>("#pricing a").forEach((link, index) => {
+    enquiryCta?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => { link.textContent = "Discuss Your Requirements"; link.href = "#ready-to-begin"; });
+    const enquiryCards = [
+      {
+        title: "General Surgery Packs",
+        description: "General, mini, universal, and HIV protection packs for general surgical procedures.",
+      },
+      {
+        title: "Specialty Drape Packs",
+        description: "Gynecology, orthopedic, and other surgery packs tailored to procedure requirements.",
+      },
+      {
+        title: "Sterilization Wrapping Sheets",
+        description: "SMS wrapping sheets in standard sizes with customized options.",
+      },
+      {
+        title: "Medical & Surgical Disposables",
+        description: "Sheets, covers, gowns, and other non-woven products for operating rooms.",
+      },
+    ];
+    document.querySelectorAll<HTMLAnchorElement>("#pricing a.framer-ga0h3").forEach((link, index) => {
       const labels = ["Enquire About Packs", "Discuss Requirements", "Request Specifications", "Request a Quote"];
-      if (index < 16) { link.textContent = labels[index % labels.length]; link.href = "/contact"; }
+      link.href = "#ready-to-begin";
+      link.querySelector('[data-framer-name="Price"]')?.remove();
+      const card = enquiryCards[index % enquiryCards.length];
+      const title = Array.from(link.querySelectorAll<HTMLElement>("h4")).find((heading) => !heading.closest('[data-framer-name="Price"]'));
+      const description = Array.from(link.querySelectorAll<HTMLElement>("p")).find((paragraph) => !paragraph.closest('[data-framer-name="Price"]'));
+      if (title) title.textContent = card.title;
+      if (description) description.textContent = card.description;
+      if (!link.querySelector(".meter-enquiry-card-action")) {
+        const action = document.createElement("span");
+        action.className = "meter-enquiry-card-action";
+        action.textContent = labels[index % labels.length];
+        link.append(action);
+      }
     });
     document.querySelectorAll<HTMLFormElement>(".framer-h1bpuk").forEach((footerForm) => {
       const contact = document.createElement("div");
@@ -183,17 +290,227 @@ export default function Home() {
       contact.innerHTML = '<a href="tel:+918925499953">+91 89254 99953</a><a href="tel:+919344991323">+91 93449 91323</a><a href="mailto:metersurgicals@gmail.com">metersurgicals@gmail.com</a><p>No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091</p>';
       footerForm.replaceWith(contact);
     });
+    const footer = document.querySelector("footer");
+    footer?.querySelectorAll<HTMLElement>('[data-framer-name="Column"]').forEach((column) => {
+      if (column.querySelector("p")?.textContent?.trim() === "Sitemap") column.remove();
+    });
+    footer?.querySelectorAll<HTMLElement>('[data-framer-name="Sitemap"]').forEach((box) => box.remove());
+    footer?.querySelectorAll<HTMLElement>('[data-framer-name="Copyright"]').forEach((copyright) => copyright.remove());
+
     const productImages = ["/meter/general-drape-pack.jpg", "/meter/gynecology-drapes.jpg", "/meter/orthopedic-drapes.jpg", "/meter/other-drapes.jpg", "/meter/sterilization-sheets.jpg"];
-    services?.querySelectorAll<HTMLImageElement>("img").forEach((image, index) => {
+    services?.querySelectorAll<HTMLImageElement>("img:not(.meter-product-carousel-image)").forEach((image, index) => {
       image.src = productImages[Math.floor(index / 2) % productImages.length];
       image.removeAttribute("srcset");
     });
     if (services && !services.nextElementSibling?.classList.contains("meter-product-range-cta")) {
       const rangeCta = document.createElement("section");
       rangeCta.className = "meter-product-range-cta";
-      rangeCta.innerHTML = '<a href="/products">View Product Range</a>';
+      rangeCta.innerHTML = '<a href="#journal-preview">View Full Product Range</a>';
       services.insertAdjacentElement("afterend", rangeCta);
     }
+
+    const journey = document.getElementById("why-althea");
+    journey?.querySelectorAll<HTMLElement>("h2").forEach((heading) => { heading.textContent = "From enquiry to product selection."; });
+    const journeySteps = [
+      ["Share Your Requirements", "Tell us the procedure, product type, required quantity, and any size or pack preferences."],
+      ["Confirm Product Specifications", "Review suitable drapes, kits, wrapping-sheet sizes, and other listed disposable products."],
+      ["Request a Quotation", "Contact Meter Surgicals to confirm product specifications, availability, and commercial terms."],
+    ];
+    journeySteps.forEach(([title, description], index) => {
+      journey?.querySelectorAll<HTMLElement>(`[data-framer-name="Claim 0${index + 1}"]`).forEach((step) => {
+        step.querySelectorAll<HTMLElement>("h4, h5").forEach((heading) => { heading.textContent = title; });
+        step.querySelectorAll<HTMLElement>("p").forEach((paragraph) => { paragraph.textContent = description; });
+      });
+    });
+
+    const contactCtaSection = document.getElementById("ready-to-begin");
+    contactCtaSection?.querySelectorAll<HTMLElement>("h3, h4").forEach((heading) => { heading.textContent = "Need product details or a quote?"; });
+    contactCtaSection?.querySelectorAll<HTMLElement>("p").forEach((paragraph) => {
+      if (paragraph.textContent?.includes("Every step") || paragraph.textContent?.includes("Share your procedure")) {
+        paragraph.textContent = "Contact Meter Surgicals about brochure-listed drapes, packs, wrapping sheets, and other disposables.";
+      }
+    });
+    contactCtaSection?.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+      link.textContent = "Contact Meter Surgicals";
+      link.href = "#ready-to-begin";
+    });
+
+    const approach = document.getElementById("our-approach");
+    approach?.querySelectorAll<HTMLElement>('[data-framer-name="Headline"] p').forEach((paragraph) => {
+      if (paragraph.textContent?.includes("About Meter Surgicals")) {
+        paragraph.textContent = "ABOUT METER SURGICALS";
+      } else {
+        paragraph.textContent = "Incorporated in 2010, Meter Surgicals is a CE-certified manufacturer serving healthcare providers in India and internationally. Its vision is to enhance quality, hygiene, and infection control in surgical environments with disposable surgical-care products.";
+      }
+    });
+    approach?.querySelectorAll<HTMLElement>('[data-framer-name="Headline"] h2').forEach((heading) => { heading.textContent = "Quality, hygiene and infection control."; });
+    const approachCards = Array.from(approach?.querySelectorAll<HTMLElement>('[data-framer-name="Bento Container"]') ?? [])
+      .filter((card) => card.querySelector("h2, h3, h4, h5") && card.querySelector("p"));
+    const approachContent = [
+      ["Surgical Environment Focus", "Our vision is to enhance quality, hygiene, and infection control in surgical environments."],
+      ["Surgical Drapes & Kits", "General and specialty surgical drapes and kits for a range of procedures."],
+      ["Customization on Request", "Selected drape packs can be customized as per customer request."],
+      ["Non-woven Disposables", "Surgeon gowns, disposable bed sheets, wrapping sheets, and other non-woven products."],
+    ];
+    const approachImages: Record<number, { src: string; alt: string }> = {
+      1: { src: "/meter/surgical-suturing.jpg", alt: "Surgical instruments being used during a procedure" },
+      2: { src: "/meter/surgical-instrument-clamp.jpg", alt: "Surgical clamp instrument" },
+      3: { src: "/meter/surgical-care-disposables.jpg", alt: "Surgeon wearing protective surgical clothing and using instruments" },
+    };
+    const approachImageLayouts: Record<number, { width: string; height: string; left: string; top: string; objectFit: "contain" | "cover"; headingWidth: string }> = {
+      1: { width: "38%", height: "100%", left: "81%", top: "50%", objectFit: "cover", headingWidth: "62%" },
+      2: { width: "45%", height: "65%", left: "77.5%", top: "55%", objectFit: "contain", headingWidth: "52%" },
+      3: { width: "40%", height: "100%", left: "80%", top: "50%", objectFit: "cover", headingWidth: "58%" },
+    };
+    approachCards.forEach((card, index) => {
+      const cardIndex = Math.floor(index / 3);
+      const content = approachContent[cardIndex];
+      const imageContent = approachImages[cardIndex];
+      const imageLayout = approachImageLayouts[cardIndex];
+      if (!content) return;
+      const heading = card.querySelector<HTMLElement>("h2, h3, h4, h5");
+      const paragraph = card.querySelector<HTMLElement>("p");
+      if (heading) heading.textContent = content[0];
+      if (paragraph) paragraph.textContent = content[1];
+      const image = card.querySelector<HTMLImageElement>("img");
+      if (image && imageContent) {
+        image.src = imageContent.src;
+        image.removeAttribute("srcset");
+        image.removeAttribute("sizes");
+        image.alt = imageContent.alt;
+        const imageFrame = image.closest<HTMLElement>("section");
+        if (imageFrame && imageLayout) {
+          Object.assign(imageFrame.style, {
+            width: imageLayout.width,
+            height: imageLayout.height,
+            left: imageLayout.left,
+            top: imageLayout.top,
+            transform: "translate(-50%, -50%)",
+            overflow: "hidden",
+          });
+          Object.assign(image.style, {
+            position: "absolute",
+            inset: "0",
+            width: "100%",
+            height: "100%",
+            objectFit: imageLayout.objectFit,
+            objectPosition: "center",
+          });
+          if (heading?.parentElement) heading.parentElement.style.maxWidth = imageLayout.headingWidth;
+        }
+      }
+    });
+
+    document.getElementById("testimonials")?.remove();
+
+    const numbers = document.getElementById("numbers");
+    if (numbers) {
+      numbers.classList.add("meter-company-facts");
+      numbers.replaceChildren();
+      const heading = document.createElement("h2");
+      heading.textContent = "Meter Surgicals at a glance";
+      const facts = document.createElement("div");
+      facts.className = "meter-company-facts-grid";
+      [["2010", "Year of incorporation"], ["CE Certified", "Surgical disposables manufacturer"], ["India & Global", "Healthcare providers served"]].forEach(([value, label]) => {
+        const fact = document.createElement("div");
+        const strong = document.createElement("strong");
+        const caption = document.createElement("p");
+        strong.textContent = value;
+        caption.textContent = label;
+        fact.append(strong, caption);
+        facts.append(fact);
+      });
+      numbers.append(heading, facts);
+    }
+
+    const pricing = document.getElementById("pricing");
+    pricing?.querySelectorAll<HTMLElement>("h2").forEach((heading) => { heading.textContent = "Discuss your product requirements."; });
+    pricing?.querySelectorAll<HTMLElement>("p").forEach((paragraph) => {
+      const text = paragraph.textContent?.trim() ?? "";
+      if (text === "Product Enquiries") paragraph.textContent = "METER SURGICALS · PRODUCT ENQUIRIES";
+      if (text.startsWith("Contact us about product selection")) {
+        paragraph.textContent = "Ask about the brochure's drapes and kits, SMS wrapping sheets, gowns, sheets, and other disposables.";
+      }
+    });
+
+    const catalog = document.getElementById("journal-preview");
+    if (catalog) {
+      catalog.classList.add("meter-brochure-catalog");
+      catalog.replaceChildren();
+      const header = document.createElement("div");
+      header.className = "meter-catalog-header";
+      const eyebrow = document.createElement("p");
+      eyebrow.textContent = "METER SURGICALS · PRODUCT BROCHURE";
+      const title = document.createElement("h2");
+      title.textContent = "Surgical drapes, packs & disposables.";
+      const intro = document.createElement("p");
+      intro.textContent = "Browse the product ranges and specifications shown in the brochure.";
+      header.append(eyebrow, title, intro);
+
+      const grid = document.createElement("div");
+      grid.className = "meter-catalog-grid";
+      brochureCategories.forEach((category) => {
+        const card = document.createElement("article");
+        card.className = "meter-catalog-card";
+        const heading = document.createElement("h3");
+        heading.textContent = category.title;
+        const description = document.createElement("p");
+        description.textContent = category.summary;
+        const list = document.createElement("ul");
+        category.products.forEach((product) => {
+          const item = document.createElement("li");
+          item.textContent = product;
+          list.append(item);
+        });
+        card.append(heading, description, list);
+        if ("note" in category) {
+          const note = document.createElement("p");
+          note.className = "meter-catalog-note";
+          note.textContent = category.note;
+          card.append(note);
+        }
+        grid.append(card);
+      });
+
+      const action = document.createElement("a");
+      action.className = "meter-catalog-action";
+      action.href = "#ready-to-begin";
+      action.textContent = "Ask about products or request a quote";
+      catalog.append(header, grid, action);
+    }
+
+    const faq = document.getElementById("faq");
+    if (faq) {
+      faq.classList.add("meter-product-faq");
+      faq.replaceChildren();
+      const heading = document.createElement("h2");
+      heading.textContent = "Product enquiries";
+      const intro = document.createElement("p");
+      intro.textContent = "Answers about brochure-listed products, specifications, and enquiries.";
+      const list = document.createElement("div");
+      list.className = "meter-faq-list";
+      brochureQuestions.forEach(([question, answer]) => {
+        const item = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = question;
+        const response = document.createElement("p");
+        response.textContent = answer;
+        item.append(summary, response);
+        list.append(item);
+      });
+      faq.append(heading, intro, list);
+    }
+
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="/"], a[href^="./"]').forEach((link) => {
+      const href = link.getAttribute("href") ?? "";
+      const path = href.split(/[?#]/, 1)[0].replace(/^\.\//, "/");
+      const target = routeTargets[path] ?? (path.startsWith("/journal/") ? "#journal-preview" : path.startsWith("/contact") ? "#ready-to-begin" : undefined);
+      if (target) link.setAttribute("href", target);
+    });
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:mailto:"]').forEach((link) => {
+      link.href = link.getAttribute("href")?.replace(/^mailto:mailto:/, "mailto:") ?? link.href;
+    });
+
     const timer = window.setTimeout(() => cleanups.push(initScrollFadeIn()), 60);
     return () => {
       window.clearTimeout(timer);
@@ -204,8 +521,5 @@ export default function Home() {
   return <>
     <div dangerouslySetInnerHTML={{ __html: html.current }} />
     <HomeCrossPortal />
-    <section className="page-end-image" aria-label="Meter Surgicals">
-      <img src="/page-end.png" alt="Meter Surgicals page artwork" />
-    </section>
   </>;
 }

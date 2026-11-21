@@ -10707,6 +10707,48 @@ img[src*="POpTLGuLzTuWYxuEYrRGJD678"] {
   #our-services .framer-olj65c-container{margin-top:24px!important}
 }
 
+#journal-preview.meter-brochure-catalog{
+  position:relative!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;
+  max-height:none!important;overflow:visible!important;padding:clamp(72px,8vw,120px) clamp(22px,6vw,92px)!important;
+  background:#f3f6f7!important;color:#183044;font-family:"Inter Display","Inter",sans-serif
+}
+.meter-catalog-header,.meter-catalog-grid,.meter-catalog-action{max-width:1180px;margin-left:auto;margin-right:auto}
+.meter-catalog-header{margin-bottom:38px}
+.meter-catalog-header>p:first-child{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#397b94}
+.meter-catalog-header h2{max-width:780px;margin:14px 0;font-family:"Inter Display","Inter",sans-serif;font-size:clamp(38px,6vw,72px);font-weight:600;letter-spacing:-.045em;line-height:1.04}
+.meter-catalog-header>p:last-child{max-width:650px;color:#5e707b;line-height:1.7}
+.meter-catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.meter-catalog-card{padding:clamp(22px,3vw,34px);border:1px solid #dce5e9;border-radius:24px;background:#fff}
+.meter-catalog-card h3{margin:0 0 12px;color:#183044;font-family:"Inter Display","Inter",sans-serif;font-size:clamp(21px,2.4vw,29px);font-weight:600;letter-spacing:-.025em;line-height:1.2}
+.meter-catalog-card>p{margin:0 0 14px;color:#5e707b;font-size:14px;line-height:1.65}
+.meter-catalog-card ul{margin:0;padding-left:19px;color:#334c5c;font-size:13px;line-height:1.8}
+.meter-catalog-card li+li{margin-top:2px}
+.meter-catalog-card .meter-catalog-note{margin-top:15px;color:#397b94;font-size:12px}
+.meter-catalog-action{display:table;margin-top:30px;padding:14px 20px;border-radius:999px;background:#183044;color:#fff;text-decoration:none;font-size:13px}
+#faq.meter-product-faq{position:relative!important;display:block!important;width:min(100% - 44px,1000px)!important;height:auto!important;min-height:0!important;overflow:visible!important;margin:80px auto!important;padding:0!important}
+.meter-product-faq>h2{margin:0 0 12px;color:#183044;font-size:clamp(38px,6vw,64px)}
+.meter-product-faq>p{margin:0 0 28px;color:#5e707b;line-height:1.7}
+.meter-faq-list details{border-top:1px solid #dce5e9;padding:18px 0}
+.meter-faq-list details:last-child{border-bottom:1px solid #dce5e9}
+.meter-faq-list summary{color:#183044;font-size:16px;font-weight:600;cursor:pointer;list-style:none}
+.meter-faq-list summary::-webkit-details-marker{display:none}
+.meter-faq-list summary::after{content:"+";float:right;color:#397b94;font-size:20px}
+.meter-faq-list details[open] summary::after{content:"−"}
+.meter-faq-list details>p{max-width:760px;margin:12px 30px 0 0;color:#5e707b;font-size:14px;line-height:1.75}
+#numbers.meter-company-facts{position:relative!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:72px clamp(22px,6vw,92px)!important;background:#183044!important;color:#fff;font-family:"Inter Display","Inter",sans-serif}
+#numbers.meter-company-facts>h2,#numbers.meter-company-facts-grid{max-width:1180px;margin-left:auto;margin-right:auto}
+#numbers.meter-company-facts>h2{margin-top:0;margin-bottom:32px;font-family:"Inter Display","Inter",sans-serif;font-size:clamp(32px,5vw,56px);font-weight:600;letter-spacing:-.04em}
+.meter-company-facts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.meter-company-facts-grid>div{padding:24px;border:1px solid rgba(255,255,255,.25);border-radius:20px}
+.meter-company-facts-grid strong{font-size:clamp(22px,3vw,34px)}
+.meter-company-facts-grid p{margin:8px 0 0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.6}
+#our-services .meter-product-carousel-image{display:block;width:180px;height:135px;max-width:100%;object-fit:contain}
+@media(max-width:700px){
+  .meter-catalog-grid{grid-template-columns:1fr}
+  .meter-catalog-header h2{font-size:42px}
+  .meter-company-facts-grid{grid-template-columns:1fr}
+}
+
 
 /* Brand-wide text tokens with stronger contrast for light backgrounds. */
 body {
@@ -10959,20 +11001,73 @@ body {
 .meter-product-range-cta a { display: inline-flex; align-items: center; min-height: 50px; padding: 0 24px; border-radius: 999px; background: #34364a; color: #fff; font: 500 13px/1 "Inter Display", Arial, sans-serif; text-decoration: none; transition: background .2s ease, transform .2s ease; }
 .meter-product-range-cta a:hover { background: #4c4e62; transform: translateY(-2px); }
 
-.page-end-image {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #edf4fa;
-  line-height: 0;
+.framer-F45SA .meter-factual-stats {
+  width: 46% !important;
+  max-width: 520px;
+  min-width: 0;
+  flex: 0 0 46% !important;
+  margin: 0 !important;
+  gap: clamp(12px, 1.5vw, 24px);
 }
-
-.page-end-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 91%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 13%, #000 91%, transparent 100%);
+.framer-F45SA .meter-factual-stats > div { min-width: 0; }
+#pricing .meter-enquiry-card-action {
+  position: absolute;
+  z-index: 2;
+  left: 32px;
+  bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: #606071;
+  color: #fff;
+  font: 500 12px/1 "Inter Display", Arial, sans-serif;
+}
+#ready-to-begin a.framer-cw4pz3,
+#ready-to-begin a.framer-cw4pz3 * {
+  color: #fff !important;
+  font-family: "Inter Display", "Inter", sans-serif !important;
+  white-space: nowrap !important;
+}
+#ready-to-begin a.framer-cw4pz3 {
+  width: max-content !important;
+  min-width: 190px !important;
+  padding: 0 24px !important;
+}
+#pricing a.framer-ga0h3 .framer-17h929 {
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 18px !important;
+  padding: 0 0 64px !important;
+}
+#pricing a.framer-ga0h3 .framer-to4a7l,
+#pricing a.framer-ga0h3 .framer-10jq0ni {
+  flex: 0 0 auto !important;
+  height: auto !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  gap: 0 !important;
+}
+#pricing a.framer-ga0h3 .framer-to4a7l { overflow: visible; }
+#pricing a.framer-ga0h3 .framer-uu8c8q {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  font-family: "Inter Display", "Inter", sans-serif !important;
+}
+#pricing a.framer-ga0h3 .framer-uu8c8q h4 {
+  font-family: "Inter Display", "Inter", sans-serif !important;
+  font-size: clamp(22px, 1.8vw, 30px) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.03em;
+  line-height: 1.15 !important;
+  transform: none !important;
+}
+#pricing a.framer-ga0h3 .framer-10jq0ni p {
+  margin: 0;
+  font-family: "Inter Display", "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 @media (max-width: 809.98px) {
@@ -10987,4 +11082,10 @@ body {
   }
 
   .meter-factual-stats { grid-template-columns: 1fr; gap: 16px; }
+  .framer-F45SA .meter-factual-stats {
+    width: 100% !important;
+    max-width: 860px;
+    flex-basis: 100% !important;
+    margin: 26px auto 0 !important;
+  }
 }
