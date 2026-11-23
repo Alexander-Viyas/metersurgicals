@@ -11,12 +11,14 @@ const brochureCategories = [
   {
     title: "Sterilization Wrapping Sheets",
     image: "/meter/sterilization-sheets.jpg",
+    brochureImage: "/meter/brochure-sterilization-wrapping-sheets.jpg",
     summary: "Standard and customized SMS wrapping sheets for sterilization.",
     products: ["50 × 50 cm", "60 × 60 cm", "75 × 75 cm", "90 × 90 cm", "Customized sizes in 43/50 GSM SMS fabric; packs of 25 or 50."],
   },
   {
     title: "General Surgery Drapes",
     image: "/meter/general-drape-pack.jpg",
+    brochureImage: "/meter/brochure-general-surgery-drapes.jpg",
     summary: "General, Mini, Universal, Hb SAG, and HIV Protection drape packs.",
     products: ["General Surgical Drape Pack", "Mini Drape Pack", "Universal Drape Pack", "Hb SAG Drape Pack", "HIV Protection Drape Kit"],
     note: "The HIV Protection Drape Kit can be customized as per customer request.",
@@ -24,6 +26,7 @@ const brochureCategories = [
   {
     title: "Gynecology Surgery Drapes",
     image: "/meter/gynecology-drapes.jpg",
+    brochureImage: "/meter/brochure-gynecology-surgery-drapes.jpg",
     summary: "Drape packs and kits for gynecology and maternity procedures.",
     products: ["LSCS Drape Pack", "Delivery Drape Pack", "DNC Drape Kit", "Hystro Lap Pouch", "Perineal Drape Kit", "Maternity Mat"],
     note: "Customization is available as per customer request.",
@@ -31,6 +34,7 @@ const brochureCategories = [
   {
     title: "Orthopedic Surgery Drapes",
     image: "/meter/orthopedic-drapes.jpg",
+    brochureImage: "/meter/brochure-orthopedic-surgery-drapes.jpg",
     summary: "Orthopedic, replacement, and arthroscopy drape packs.",
     products: ["Ortho Drape Pack (5-gown and 3-gown options)", "Knee O Drape", "Hip U Drape", "Knee Arthroscopy", "TKR Total Knee Replacement Drape Pack", "THR Total Hip Replacement Drape Pack", "Shoulder Arthroscopy"],
     note: "Customization is available as per customer request.",
@@ -38,12 +42,14 @@ const brochureCategories = [
   {
     title: "Other Surgery Drapes",
     image: "/meter/other-drapes.jpg",
+    brochureImage: "/meter/brochure-other-surgery-drapes.jpg",
     summary: "Specialty drape packs for a broad range of surgical procedures.",
     products: ["CABG Drape Packs", "Angio Drape Packs", "LAVH Drape Kit", "Renal Transplant Packs", "Cystoscopy Drape Packs", "Embryo Transplant Packs", "Egg Collection Packs", "Urology Drape Packs", "IVF Drape Packs", "OCR-ET Packs", "Neurology Drape Packs", "Laparoscopy Drape Packs", "Other Customized Drape Packs", "PCNL Drape", "TURP Drape"],
     note: "Drape packs can be customized as per customer request.",
   },
   {
     title: "Other Medical & Surgical Disposables",
+    brochureImage: "/meter/brochure-other-medical-surgical-disposables.jpg",
     summary: "Additional disposable products featured in the brochure.",
     products: ["Large Sheet", "Center Hole Sheet", "Mayo Cover", "C-Arm Cover", "Leggings", "Camera Cover", "Shoe Cover", "Trolley Sheet", "Apron", "Under Pad"],
   },
@@ -144,7 +150,7 @@ function adaptContent(source: string) {
     ["Do you offer wellness treatments as well as aesthetic ones?", "Which wrapping-sheet specifications are listed?"],
     ["Yes. Althea combines aesthetic care with wellness-focused treatments that support relaxation, recovery, and overall balance.", "Sizes listed are 50 × 50 cm, 60 × 60 cm, 75 × 75 cm, and 90 × 90 cm. Customized sizes use 43/50 GSM SMS fabric and are available in packs of 25 or 50."],
     ["How can I book an appointment?", "How can I contact Meter Surgicals?"],
-    ["You can book your consultation online through our booking page or contact us directly if you have questions first.", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com. Address: No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091."],
+    ["You can book your consultation online through our booking page or contact us directly if you have questions first.", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com. Address: Plot No 43, Puzhuthivakkam Main Road, Puzhuthivakkam, Tamil Nadu, Chennai 600091."],
     ["Are the treatments safe?", "What details should I share for a product enquiry?"],
     ["Your safety is always our priority. We work with professional standards, proven methods, and carefully chosen treatments designed for long-term skin health and well-being.", "Share the procedure, product type, required quantity, and any size or pack preferences with our team."],
     ["How do I know which treatment is right for me?", "How can I request a quotation?"],
@@ -153,9 +159,14 @@ function adaptContent(source: string) {
     ["No. We believe good care starts with trust and honest advice. The consultation is about understanding your options, not pushing you into decisions.", "Yes. Product specifications, availability, quantities, and commercial terms must be confirmed with Meter Surgicals."],
     ["What should I expect during my first visit?", "Which products are available for different procedures?"],
     ["Your first visit starts with a calm, personal consultation. We talk about your goals, your skin or wellness concerns, and any questions you may have. From there, we suggest a thoughtful plan that fits you, without pressure and without rushing into decisions.", "The brochure lists general, gynecology, orthopedic, and specialty surgery drapes, plus wrapping sheets and other medical and surgical disposables."],
-    ["Didn’t find what you were looking for? Get in touch and let’s sort it out.", "Need product information or a quotation? Contact Meter Surgicals."],
+    ["Didn’t find what you were looking for? Get in touch and let’s sort it out.", ""],
   ];
   let html = replacements.reduce((content, [from, to]) => content.replaceAll(from, to), source);
+  html = html
+    .replaceAll("Didn’t find what you were looking for? Get in touch and let’s sort it out.", "")
+    .replaceAll("Didn't find what you were looking for? Get in touch and let's sort it out.", "")
+    .replace(/<[^>]+>Experience with sound<[^>]+>/gi, "")
+    .replace(/Experience with sound/gi, "");
   html = html.replace(/Every step at Meter Surgicals starts with a conversation\.[^<]*/g, "Share your procedure and product requirements with Meter Surgicals.");
   const slides = [
     ["consultation felt", "General & Specialty Drapes", "Explore drape packs across general, gynecology, orthopedic, and specialty surgical categories."],
@@ -180,13 +191,30 @@ export default function Home() {
 
   useEffect(() => {
     const cleanups: (() => void)[] = [];
+    document.querySelectorAll<HTMLElement>("button, a, [role='button']").forEach((control) => {
+      const label = [
+        control.textContent?.toLowerCase(),
+        control.getAttribute("aria-label")?.toLowerCase(),
+        control.getAttribute("title")?.toLowerCase(),
+      ].filter(Boolean).join(" ");
+      if (label.includes("experience") && label.includes("sound")) control.remove();
+    });
+    document.querySelectorAll<HTMLElement>("p, h1, h2, h3, h4, h5, button, a, div").forEach((element) => {
+      const text = element.textContent?.replace(/\s+/g, " ").trim() ?? "";
+      if (
+        text === "Experience with sound" ||
+        text === "Didn’t find what you were looking for? Get in touch and let’s sort it out." ||
+        text === "Didn't find what you were looking for? Get in touch and let's sort it out."
+      ) {
+        element.remove();
+      }
+    });
     const routeTargets: Record<string, string> = {
       "/about": "#our-approach",
       "/products": "#our-services",
       "/services": "#our-services",
       "/brochure": "#journal-preview",
       "/journal": "#journal-preview",
-      "/contact": "#ready-to-begin",
     };
     document.querySelectorAll<HTMLAnchorElement>('a[href^="/"]').forEach((link) => {
       const target = routeTargets[link.getAttribute("href") ?? ""];
@@ -232,9 +260,28 @@ export default function Home() {
       if (primary) primary.href = "#our-services";
       heroMessage.querySelector('a[href="/meter/meter-surgicals-drapes.pdf"]')?.remove();
     }
+    hero?.querySelectorAll<HTMLAnchorElement>('a[href="/#ready-to-begin"], a[href="#ready-to-begin"]').forEach((link) => link.remove());
     document.querySelectorAll<HTMLElement>(".framer-1sdbrz5-container").forEach((headerCta) => {
       headerCta.querySelectorAll("p, strong").forEach((label) => { label.textContent = "Request a Quote"; });
     });
+    const headerBrand = document.querySelector<HTMLAnchorElement>('[data-framer-name="Navigation"] > div:first-child a');
+    if (headerBrand) {
+      headerBrand.classList.add("meter-home-brand");
+      headerBrand.closest<HTMLElement>('[data-framer-component-type="RichTextContainer"]')?.classList.add("meter-home-brand-wrap");
+      const logo = document.createElement("img");
+      logo.src = "/meter/meter-surgicals-logo.png";
+      logo.alt = "";
+      logo.width = 44;
+      logo.height = 44;
+      const copy = document.createElement("span");
+      copy.className = "meter-home-brand-copy";
+      const name = document.createElement("b");
+      name.textContent = "METER SURGICALS";
+      const tagline = document.createElement("small");
+      tagline.textContent = "SAVING LIVES";
+      copy.append(name, tagline);
+      headerBrand.replaceChildren(logo, copy);
+    }
     document.querySelectorAll<HTMLElement>(".framer-3mmeed").forEach((stats) => {
       stats.replaceChildren();
       stats.classList.add("meter-factual-stats");
@@ -287,7 +334,7 @@ export default function Home() {
     document.querySelectorAll<HTMLFormElement>(".framer-h1bpuk").forEach((footerForm) => {
       const contact = document.createElement("div");
       contact.className = "meter-footer-contact-info";
-      contact.innerHTML = '<a href="tel:+918925499953">+91 89254 99953</a><a href="tel:+919344991323">+91 93449 91323</a><a href="mailto:metersurgicals@gmail.com">metersurgicals@gmail.com</a><p>No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091</p>';
+      contact.innerHTML = '<a href="tel:+918925499953">+91 89254 99953</a><a href="tel:+919344991323">+91 93449 91323</a><a href="mailto:metersurgicals@gmail.com">metersurgicals@gmail.com</a><p>Plot No 43, Puzhuthivakkam Main Road, Puzhuthivakkam, Tamil Nadu, Chennai 600091</p>';
       footerForm.replaceWith(contact);
     });
     const footer = document.querySelector("footer");
@@ -296,6 +343,26 @@ export default function Home() {
     });
     footer?.querySelectorAll<HTMLElement>('[data-framer-name="Sitemap"]').forEach((box) => box.remove());
     footer?.querySelectorAll<HTMLElement>('[data-framer-name="Copyright"]').forEach((copyright) => copyright.remove());
+    if (footer) {
+      footer.querySelectorAll<HTMLElement>(".meter-home-footer-brand").forEach((brand) => brand.remove());
+      const footerBrand = document.createElement("a");
+      footerBrand.className = "meter-home-footer-brand";
+      footerBrand.href = "/";
+      const logo = document.createElement("img");
+      logo.src = "/meter/meter-surgicals-logo.png";
+      logo.alt = "";
+      logo.width = 42;
+      logo.height = 42;
+      const copy = document.createElement("span");
+      copy.className = "meter-home-brand-copy";
+      const name = document.createElement("b");
+      name.textContent = "METER SURGICALS";
+      const tagline = document.createElement("small");
+      tagline.textContent = "SAVING LIVES";
+      copy.append(name, tagline);
+      footerBrand.append(logo, copy);
+      footer.append(footerBrand);
+    }
 
     const productImages = ["/meter/general-drape-pack.jpg", "/meter/gynecology-drapes.jpg", "/meter/orthopedic-drapes.jpg", "/meter/other-drapes.jpg", "/meter/sterilization-sheets.jpg"];
     services?.querySelectorAll<HTMLImageElement>("img:not(.meter-product-carousel-image)").forEach((image, index) => {
@@ -452,6 +519,15 @@ export default function Home() {
       brochureCategories.forEach((category) => {
         const card = document.createElement("article");
         card.className = "meter-catalog-card";
+        const photo = document.createElement("img");
+        photo.className = "meter-catalog-photo";
+        if (category.title === "Sterilization Wrapping Sheets") {
+          photo.classList.add("meter-catalog-photo-bottom");
+        }
+        photo.src = category.brochureImage;
+        photo.alt = category.title;
+        photo.loading = "lazy";
+        card.append(photo);
         const heading = document.createElement("h3");
         heading.textContent = category.title;
         const description = document.createElement("p");
@@ -470,6 +546,30 @@ export default function Home() {
           card.append(note);
         }
         grid.append(card);
+      });
+
+      [
+        {
+          href: "/products/msgs01",
+          title: "Product Code MSGS01",
+          description: "General Surgery Kit",
+        },
+        {
+          href: "/products/ortho-pack-a1",
+          title: "Ortho Pack A-1",
+          description: "Orthopedic procedure pack",
+        },
+      ].forEach((product) => {
+        const packLink = document.createElement("a");
+        packLink.className = "meter-catalog-card meter-catalog-product-link";
+        packLink.href = product.href;
+        packLink.setAttribute("aria-label", `View ${product.title}`);
+        const packTitle = document.createElement("h3");
+        packTitle.textContent = product.title;
+        const packDescription = document.createElement("p");
+        packDescription.textContent = product.description;
+        packLink.append(packTitle, packDescription);
+        grid.append(packLink);
       });
 
       const action = document.createElement("a");
@@ -504,8 +604,19 @@ export default function Home() {
     document.querySelectorAll<HTMLAnchorElement>('a[href^="/"], a[href^="./"]').forEach((link) => {
       const href = link.getAttribute("href") ?? "";
       const path = href.split(/[?#]/, 1)[0].replace(/^\.\//, "/");
-      const target = routeTargets[path] ?? (path.startsWith("/journal/") ? "#journal-preview" : path.startsWith("/contact") ? "#ready-to-begin" : undefined);
+      const target = routeTargets[path] ?? (path.startsWith("/journal/") ? "#journal-preview" : undefined);
       if (target) link.setAttribute("href", target);
+    });
+    document.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+      const label = link.textContent?.replace(/\s+/g, " ").trim().toLowerCase() ?? "";
+      if (
+        label.includes("contact meter surgicals") ||
+        label.includes("request a quote") ||
+        label === "contact us" ||
+        label.includes("discuss your requirements")
+      ) {
+        link.href = "/contact-us";
+      }
     });
     document.querySelectorAll<HTMLAnchorElement>('a[href^="mailto:mailto:"]').forEach((link) => {
       link.href = link.getAttribute("href")?.replace(/^mailto:mailto:/, "mailto:") ?? link.href;

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Meter Surgicals | Saving Lives",
   description:
-    "Meter Surgicals is a surgical-disposables manufacturer incorporated in 2010, serving healthcare providers in India and internationally. Surgical drapes, procedure packs, gowns, bed sheets, wrapping sheets, and other non-woven disposables. +91 89254 99953, +91 93449 91323, metersurgicals@gmail.com. No 3. 2/151, Brindhavan Street, Balaya Garden, Madipakkam, Chennai – 600 091.",
+    "Meter Surgicals is a surgical-disposables manufacturer incorporated in 2010, serving healthcare providers in India and internationally. Surgical drapes, procedure packs, gowns, bed sheets, wrapping sheets, and other non-woven disposables. +91 89254 99953, +91 93449 91323, metersurgicals@gmail.com. Plot No 43, Puzhuthivakkam Main Road, Puzhuthivakkam, Tamil Nadu, Chennai 600091.",
   keywords: ["Meter Surgicals", "Saving Lives", "surgical drapes", "procedure packs", "sterilization wrapping sheets", "surgical disposables", "Chennai"],
   openGraph: {
     title: "Meter Surgicals | Saving Lives",

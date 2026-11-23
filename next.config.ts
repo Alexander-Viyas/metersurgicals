@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
       { source: "/services", destination: "/#our-services", permanent: true },
       { source: "/brochure", destination: "/#journal-preview", permanent: true },
       { source: "/journal", destination: "/#journal-preview", permanent: true },
-      { source: "/contact", destination: "/#ready-to-begin", permanent: true },
     ];
   },
   typescript: {
