@@ -205,6 +205,66 @@ export default function MedicalCross3D() {
     let targetRotX = THREE.MathUtils.degToRad(16);
     let targetRotY = THREE.MathUtils.degToRad(-22);
     let scrollY = window.scrollY;
+    let animationFrameId: number | null = null;
+    let lastFrameTime = 0;
+    let accumulatedFrameTime = 0;
+    const clock = new THREE.Clock();
+    const renderFrameDuration = 1000 / 60;
+    const visibleScrollLimit = 380;
+
+    const stopAnimation = () => {
+      if (animationFrameId === null) return;
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    };
+
+    const animate = (frameTime: number) => {
+      animationFrameId = null;
+      if (scrollY >= visibleScrollLimit || document.hidden) return;
+
+      if (lastFrameTime > 0) {
+        const elapsed = frameTime - lastFrameTime;
+        lastFrameTime = frameTime;
+        if (elapsed < renderFrameDuration) {
+          accumulatedFrameTime += elapsed;
+          if (accumulatedFrameTime < renderFrameDuration) {
+            animationFrameId = requestAnimationFrame(animate);
+            return;
+          }
+          accumulatedFrameTime -= renderFrameDuration;
+        } else {
+          accumulatedFrameTime = 0;
+        }
+      } else {
+        lastFrameTime = frameTime;
+      }
+
+      const t = clock.getElapsedTime();
+
+      // Elegant floating levitation (slow breathing sine wave)
+      const hoverY = Math.sin(t * 1.5) * 0.08;
+      const hoverZ = Math.cos(t * 1.1) * 0.05;
+      const hoverRotZ = Math.sin(t * 0.9) * 0.03;
+
+      crossGroup.position.y = 0.2 + hoverY;
+      crossGroup.position.z = hoverZ;
+
+      // Smooth lerp rotation toward mouse target
+      crossGroup.rotation.x += (targetRotX - crossGroup.rotation.x) * 0.05;
+      crossGroup.rotation.y += (targetRotY - crossGroup.rotation.y + scrollY * 0.0006) * 0.05;
+      crossGroup.rotation.z = THREE.MathUtils.degToRad(-8) + hoverRotZ + mouseX * 0.12;
+
+      // Subtle independent spin for the halo ring
+      ringMesh.rotation.z = t * 0.15;
+
+      renderer.render(scene, camera);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const startAnimation = () => {
+      if (animationFrameId !== null || scrollY >= visibleScrollLimit || document.hidden) return;
+      animationFrameId = requestAnimationFrame(animate);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       const nx = (e.clientX / window.innerWidth) * 2 - 1;
@@ -220,7 +280,7 @@ export default function MedicalCross3D() {
     const handleScroll = () => {
       scrollY = window.scrollY;
       // Scroll fade out: fades smoothly to 0 by scroll=380px
-      const fadeProgress = Math.min(1, Math.max(0, scrollY / 380));
+      const fadeProgress = Math.min(1, Math.max(0, scrollY / visibleScrollLimit));
       const opacity = 1 - fadeProgress;
 
       if (container) {
@@ -228,6 +288,9 @@ export default function MedicalCross3D() {
         container.style.transform = `translateY(${-scrollY * 0.2}px) scale(${1 - fadeProgress * 0.08})`;
         container.style.pointerEvents = opacity > 0.05 ? "auto" : "none";
       }
+
+      if (scrollY < visibleScrollLimit) startAnimation();
+      else stopAnimation();
     };
 
     const handleResize = () => {
@@ -240,50 +303,25 @@ export default function MedicalCross3D() {
       renderer.setSize(width, height);
     };
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) stopAnimation();
+      else handleScroll();
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     handleResize();
     handleScroll();
 
-    // --- RENDER LOOP ---
-    let animationFrameId: number;
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-
-      if (scrollY < 550) {
-        const t = clock.getElapsedTime();
-
-        // Elegant floating levitation (slow breathing sine wave)
-        const hoverY = Math.sin(t * 1.5) * 0.08;
-        const hoverZ = Math.cos(t * 1.1) * 0.05;
-        const hoverRotZ = Math.sin(t * 0.9) * 0.03;
-
-        crossGroup.position.y = 0.2 + hoverY;
-        crossGroup.position.z = hoverZ;
-
-        // Smooth lerp rotation toward mouse target
-        crossGroup.rotation.x += (targetRotX - crossGroup.rotation.x) * 0.05;
-        crossGroup.rotation.y += (targetRotY - crossGroup.rotation.y + scrollY * 0.0006) * 0.05;
-        crossGroup.rotation.z = THREE.MathUtils.degToRad(-8) + hoverRotZ + mouseX * 0.12;
-
-        // Subtle independent spin for the halo ring
-        ringMesh.rotation.z = t * 0.15;
-
-        renderer.render(scene, camera);
-      }
-    };
-
-    animate();
-
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      stopAnimation();
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       renderer.dispose();
       crossGeo.dispose();
       innerGeo.dispose();

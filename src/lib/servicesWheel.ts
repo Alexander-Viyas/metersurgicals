@@ -156,7 +156,25 @@ export function initServicesWheel(servicesContainer: HTMLElement): () => void {
   let isDragging = false;
   let startX = 0;
   let dragStartAngle = -140;
-  let animId: number;
+  let animId: number | null = null;
+  let scrollFrameId: number | null = null;
+
+  const tick = () => {
+    animId = null;
+
+    const diff = targetAngle - currentAngle;
+    if (Math.abs(diff) <= 0.005) return;
+
+    currentAngle += diff * 0.12;
+    wheel.style.transform = `rotate(${currentAngle.toFixed(3)}deg)`;
+    animId = requestAnimationFrame(tick);
+  };
+
+  const scheduleTick = () => {
+    if (animId === null && Math.abs(targetAngle - currentAngle) > 0.005) {
+      animId = requestAnimationFrame(tick);
+    }
+  };
 
   // Configure the product cards nested inside the wheel's positioning wrappers.
   const cardDivs = wheel.querySelectorAll<HTMLElement>('[data-framer-name="Main Page Service Card"]');
@@ -190,18 +208,24 @@ export function initServicesWheel(servicesContainer: HTMLElement): () => void {
   // SCROLL SYNC
   // ═══════════════════════════════════════════════════════════════
   const updateFromScroll = () => {
-    if (isDragging) return;
+    if (isDragging || scrollFrameId !== null) return;
 
-    const rect = runway.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const totalDist = runway.offsetHeight - windowHeight;
-    if (totalDist <= 0) return;
+    scrollFrameId = requestAnimationFrame(() => {
+      scrollFrameId = null;
+      if (isDragging) return;
 
-    const scrolled = -rect.top;
-    const p = Math.min(1, Math.max(0, scrolled / totalDist));
+      const rect = runway.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const totalDist = runway.offsetHeight - windowHeight;
+      if (totalDist <= 0) return;
 
-    // Progress smoothly from Card 0 (-140deg) to Card 4 (-192deg)
-    targetAngle = -140 - p * 52;
+      const scrolled = -rect.top;
+      const p = Math.min(1, Math.max(0, scrolled / totalDist));
+
+      // Progress smoothly from Card 0 (-140deg) to Card 4 (-192deg)
+      targetAngle = -140 - p * 52;
+      scheduleTick();
+    });
   };
 
   // ═══════════════════════════════════════════════════════════════
@@ -221,6 +245,7 @@ export function initServicesWheel(servicesContainer: HTMLElement): () => void {
     // Drag left advances to next card (- deg)
     const angleDelta = deltaX * 0.035;
     targetAngle = Math.min(-136, Math.max(-196, dragStartAngle + angleDelta));
+    scheduleTick();
   };
 
   const onPointerUp = () => {
@@ -261,20 +286,9 @@ export function initServicesWheel(servicesContainer: HTMLElement): () => void {
   // ═══════════════════════════════════════════════════════════════
   // RENDER / LERP LOOP
   // ═══════════════════════════════════════════════════════════════
-  const tick = () => {
-    animId = requestAnimationFrame(tick);
-
-    const diff = targetAngle - currentAngle;
-    if (Math.abs(diff) > 0.005) {
-      currentAngle += diff * 0.12;
-      wheel.style.transform = `rotate(${currentAngle.toFixed(3)}deg)`;
-    }
-  };
-
-  animId = requestAnimationFrame(tick);
-
   return () => {
-    cancelAnimationFrame(animId);
+    if (animId !== null) cancelAnimationFrame(animId);
+    if (scrollFrameId !== null) cancelAnimationFrame(scrollFrameId);
     interactions.abort();
     window.removeEventListener("scroll", updateFromScroll);
     sticky.removeEventListener("pointerdown", onPointerDown);

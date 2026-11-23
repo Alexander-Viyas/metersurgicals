@@ -180,7 +180,7 @@ export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
   const totalWords = spans.length;
   let targetProgress = 0;
   let currentProgress = 0;
-  let animId: number;
+  let animId: number | null = null;
 
   const updateWords = (p: number) => {
     const startRange = 0.0;
@@ -234,27 +234,37 @@ export function initQuoteReveal(quoteContainer: HTMLElement): () => void {
   };
 
   const loop = () => {
-    animId = requestAnimationFrame(loop);
-    measure();
+    animId = null;
 
     const diff = targetProgress - currentProgress;
-    if (Math.abs(diff) > 0.001) {
-      currentProgress += diff * 0.2;
+    if (Math.abs(diff) <= 0.001) {
+      currentProgress = targetProgress;
       updateWords(currentProgress);
+      return;
     }
+
+    currentProgress += diff * 0.2;
+    updateWords(currentProgress);
+    animId = requestAnimationFrame(loop);
   };
 
   measure();
   currentProgress = targetProgress;
   updateWords(currentProgress);
-  animId = requestAnimationFrame(loop);
 
-  window.addEventListener("scroll", measure, { passive: true });
-  document.addEventListener("scroll", measure, { passive: true });
+  const scheduleUpdate = () => {
+    measure();
+    if (animId === null && Math.abs(targetProgress - currentProgress) > 0.001) {
+      animId = requestAnimationFrame(loop);
+    }
+  };
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate, { passive: true });
 
   return () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener("scroll", measure);
-    document.removeEventListener("scroll", measure);
+    if (animId !== null) cancelAnimationFrame(animId);
+    window.removeEventListener("scroll", scheduleUpdate);
+    window.removeEventListener("resize", scheduleUpdate);
   };
 }
