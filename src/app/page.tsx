@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { framerHtml } from "./content";
-import HomeCrossPortal from "@/components/HomeCrossPortal";
 import { initQuoteReveal } from "@/lib/quoteReveal";
 import { initServicesWheel } from "@/lib/servicesWheel";
 import { initScrollFadeIn } from "@/lib/scrollFadeIn";
@@ -63,6 +62,17 @@ const brochureQuestions = [
   ["What should I include in a product enquiry?", "Share the procedure, product type, required quantity, and any size or pack preferences."],
   ["How can I contact Meter Surgicals?", "Call +91 89254 99953 or +91 93449 91323, or email metersurgicals@gmail.com."],
 ];
+
+const mobileSectionLinks = [
+  ["Home", "#hero"],
+  ["About Us", "#our-approach"],
+  ["Products", "#our-services"],
+  ["Our Process", "#why-althea"],
+  ["Product Enquiries", "#pricing"],
+  ["Product Range", "#journal-preview"],
+  ["FAQs", "#faq"],
+  ["Contact", "#ready-to-begin"],
+] as const;
 
 function adaptContent(source: string) {
   const replacements: [string, string][] = [
@@ -187,7 +197,19 @@ function adaptContent(source: string) {
   return html;
 }
 export default function Home() {
-  const html = useRef(adaptContent(framerHtml));
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [html] = useState(() => adaptContent(framerHtml));
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const cleanups: (() => void)[] = [];
@@ -630,7 +652,35 @@ export default function Home() {
   }, []);
 
   return <>
-    <div dangerouslySetInnerHTML={{ __html: html.current }} />
-    <HomeCrossPortal />
+    <div dangerouslySetInnerHTML={{ __html: html }} />
+    <div className="mobile-section-menu">
+      <button
+        className="mobile-section-menu__toggle"
+        type="button"
+        aria-expanded={mobileMenuOpen}
+        aria-controls="mobile-section-menu-panel"
+        aria-label={mobileMenuOpen ? "Close section menu" : "Open section menu"}
+        onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
+      >
+        <span className="mobile-section-menu__icon" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </span>
+        <span>{mobileMenuOpen ? "Close" : "Menu"}</span>
+      </button>
+      <nav
+        className="mobile-section-menu__panel"
+        id="mobile-section-menu-panel"
+        aria-label="Page sections"
+        hidden={!mobileMenuOpen}
+      >
+        {mobileSectionLinks.map(([label, href]) => (
+          <a key={href} href={href} onClick={() => setMobileMenuOpen(false)}>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
   </>;
 }

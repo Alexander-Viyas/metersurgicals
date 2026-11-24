@@ -10991,6 +10991,106 @@ body {
   }
 }
 
+.mobile-section-menu {
+  display: none;
+}
+
+@media (max-width: 809.98px) {
+  .framer-UYKUh .framer-1sdbrz5-container {
+    display: none !important;
+  }
+
+  .mobile-section-menu {
+    position: fixed;
+    z-index: 10000;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    justify-items: end;
+    gap: 10px;
+    font-family: "Inter Display", Inter, Arial, sans-serif;
+  }
+
+  .mobile-section-menu__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 92px;
+    min-height: 46px;
+    padding: 0 15px;
+    border: 1px solid rgba(255, 255, 255, .32);
+    border-radius: 999px;
+    background: #16384d;
+    color: #fff;
+    box-shadow: 0 5px 18px rgba(7, 26, 40, .2);
+    font: 600 13px/1 "Inter Display", Inter, Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .mobile-section-menu__toggle:focus-visible,
+  .mobile-section-menu__panel a:focus-visible {
+    outline: 3px solid #70c4d2;
+    outline-offset: 3px;
+  }
+
+  .mobile-section-menu__icon {
+    display: grid;
+    gap: 4px;
+    width: 16px;
+  }
+
+  .mobile-section-menu__icon span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+
+  .mobile-section-menu__panel {
+    box-sizing: border-box;
+    display: grid;
+    width: min(250px, calc(100vw - 28px));
+    padding: 9px;
+    border: 1px solid rgba(22, 56, 77, .12);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 14px 36px rgba(7, 26, 40, .2);
+  }
+
+  .mobile-section-menu__panel[hidden] {
+    display: none;
+  }
+
+  .mobile-section-menu__panel a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 13px;
+    border-radius: 10px;
+    color: #16384d;
+    font: 500 14px/1.3 "Inter Display", Inter, Arial, sans-serif;
+    text-decoration: none;
+  }
+
+  .mobile-section-menu__panel a:hover,
+  .mobile-section-menu__panel a:active {
+    background: #eef5f7;
+  }
+
+  #hero,
+  #our-approach,
+  #our-services,
+  #why-althea,
+  #pricing,
+  #journal-preview,
+  #faq,
+  #ready-to-begin {
+    scroll-margin-top: 82px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #hero .framer-eo1y6 a {
     transition: none;
@@ -10998,12 +11098,15 @@ body {
 }
 
 /* Restore the clean, original Meter Surgicals landing hero. */
+.framer-UYKUh > .framer-1ti9nbu,
+.framer-DFt9Q .framer-16lf0oi {
+  display: none !important;
+}
+
 #hero {
   overflow: hidden !important;
-  background-color: #edf4fa !important;
-  background-image:
-    radial-gradient(ellipse at 50% 48%, rgba(255,255,255,.99) 0%, rgba(248,251,253,.98) 34%, rgba(227,236,248,.94) 100%),
-    linear-gradient(115deg, rgba(208,222,241,.45), transparent 38%, rgba(205,220,240,.35)) !important;
+  background-color: #16384d !important;
+  background-image: url('/meter/hero-surgery-team.png') !important;
   background-size: cover !important;
   background-position: center !important;
 }
@@ -11012,14 +11115,8 @@ body {
   content: "";
   position: absolute;
   z-index: 1;
-  width: min(94vw, 1380px);
-  aspect-ratio: 1;
-  left: 50%;
-  top: 59%;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(183, 204, 232, .26);
-  border-radius: 50%;
-  box-shadow: 0 0 0 92px rgba(183,204,232,.045), 0 0 0 184px rgba(183,204,232,.035), 0 0 0 276px rgba(183,204,232,.025);
+  inset: 0;
+  background: linear-gradient(90deg, rgba(7, 26, 40, .34) 0%, rgba(7, 26, 40, .18) 48%, rgba(7, 26, 40, .08) 100%);
   pointer-events: none;
 }
 
@@ -11038,15 +11135,15 @@ body {
 }
 
 #hero .framer-eo1y6 h1 {
-  color: #343434 !important;
-  text-shadow: none !important;
+  color: #fff !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .62) !important;
   font-size: clamp(48px, 6.35vw, 118px) !important;
 }
 
 #hero .framer-eo1y6 > p {
-  color: #3e4145 !important;
+  color: #fff !important;
   font-weight: 450 !important;
-  text-shadow: none !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .62) !important;
 }
 
 #hero .framer-eo1y6 a {
@@ -11421,6 +11518,29 @@ body {
 
   #quote #quote-sticky-viewport h5 + p + div + a {
     margin-top: 16px !important;
+  }
+
+  #quote #quote-scroll-runway {
+    height: auto !important;
+  }
+
+  #quote #quote-sticky-viewport {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: calc(100svh - 72px);
+    overflow: visible !important;
+  }
+
+  #quote #quote-sticky-viewport h5 span,
+  #quote #quote-sticky-viewport h5 + p,
+  #quote #quote-sticky-viewport h5 + p + div,
+  #quote #quote-sticky-viewport h5 + p + div + a {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
   }
 
   #ready-to-begin [data-framer-name="Text Container"] {
